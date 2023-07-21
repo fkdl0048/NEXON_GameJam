@@ -31,7 +31,25 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Init();
+        StartCoroutine(TurnManager.instance.StartGameCo());
+    }
+
+    private void Update()
+    {
+        InputKey();
+    }
+
+    void InputKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            TurnManager.OnAddCard?.Invoke(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            TurnManager.OnAddCard?.Invoke(true);
+        }
     }
 }

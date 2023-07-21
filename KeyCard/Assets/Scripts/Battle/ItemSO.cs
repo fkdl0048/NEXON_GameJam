@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Item
 {
     public int id;
+    public float percent;
     public string name;
     public Sprite image;
     public string descryption;
