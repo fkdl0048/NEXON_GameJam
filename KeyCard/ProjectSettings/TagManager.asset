@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapBackLayer
+    uniqueID: 529193147
+    locked: 0
+  - name: Effect
+    uniqueID: 3373570185
+    locked: 0
+  - name: MapFrontLayer
+    uniqueID: 1069955971
+    locked: 0
