@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: V Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 8880746793077340915}
---- !u!114 &8880746793077340915
+  - {fileID: 3708030024205989181}
+--- !u!114 &3708030024205989181
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35,10 +35,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.26
+    m_Value: 0.3
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.409
+    m_Value: 0.2
   rounded:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
