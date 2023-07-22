@@ -12904,7 +12904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -406.80585, y: 70}
+  m_AnchoredPosition: {x: -425, y: 98}
   m_SizeDelta: {x: 554.3883, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2546808664930104441
@@ -15933,8 +15933,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17503,7 +17503,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1546, y: 279}
+  m_SizeDelta: {x: 1546, y: 356.982}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7986554361170845171
 MonoBehaviour:
@@ -17525,15 +17525,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB7F0\uB358 \uB2E4\uB9AC\uAC00 \uBB34\uB108\uC84C\uB2E4. \uB2E4\uC74C\uC758
+  m_text: "<size=120%>\uB7F0\uB358 \uB2E4\uB9AC\uAC00 \uBB34\uB108\uC84C\uB2E4. \uB2E4\uC74C\uC758
     \uADDC\uCE59\uB300\uB85C \uACBD\uAD00, \uB3C4\uB451 \uADF8\uB9AC\uACE0 \uAE08\uAD34\uB97C
-    \uBC18\uB300\uCABD\uC73C\uB85C \uC62E\uACA8\uB77C.\r\n\xB7 \uD55C\uCABD \uB545\uC5D0
-    \uB3C4\uB451\uC758 \uC218\uAC00 \uACBD\uAD00\uC758 \uC218\uBCF4\uB2E4 2\uBA85
-    \uC774\uC0C1 \uB354 \uB9CE\uC73C\uBA74 \uBC18\uB780\uC774 \uC77C\uC5B4\uB09C\uB2E4.\r\n\xB7
+    \uBC18\uB300\uCABD\uC73C\uB85C \uC62E\uACA8\uB77C.\r</size>\n\xB7 \uD55C\uCABD
+    \uB545\uC5D0 \uB3C4\uB451\uC758 \uC218\uAC00 \uACBD\uAD00\uC758 \uC218\uBCF4\uB2E4
+    2\uBA85 \uC774\uC0C1 \uB354 \uB9CE\uC73C\uBA74 \uBC18\uB780\uC774 \uC77C\uC5B4\uB09C\uB2E4.\r\n\xB7
     \uD55C\uCABD \uB545\uC5D0 \uB3C4\uB451\uACFC \uAE08\uAD34\uB9CC \uAC19\uC774
     \uC788\uC73C\uBA74 \uB3C4\uB451\uC774 \uAE08\uAD34\uB97C \uB4E4\uACE0 \uB2EC\uC544\uB09C\uB2E4.\r\n\xB7
-    \uBC30\uC5D0\uB294 \uC0AC\uB78C 2\uBA85 \uD639\uC740 \uAE08\uAD34 2\uAC1C\uAE4C\uC9C0\uB9CC
-    \uD0C8 \uC218 \uC788\uACE0, \uC0AC\uB78C\uC774 \uD0C0\uC57C \uBC30\uAC00 \uC6C0\uC9C1\uC778\uB2E4."
+    \uBC30\uC5D0\uB294 \uC0AC\uB78C\uC774 2\uBA85\uAE4C\uC9C0 \uD0C8 \uC218 \uC788\uACE0
+    \uC0AC\uB78C\uC774 \uC788\uC5B4\uC57C \uC6C0\uC9C1\uC778\uB2E4. \uAE08\uAD34\uC640
+    \uC0AC\uB78C\uC740 \uBB34\uAC8C\uAC00 \uAC19\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5088b25078e9199478a2e6ca765a5c7e, type: 2}
   m_sharedMaterial: {fileID: 2418594797312499592, guid: 5088b25078e9199478a2e6ca765a5c7e, type: 2}
@@ -17572,7 +17573,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 15
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -18036,7 +18037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45, y: -38}
+  m_AnchoredPosition: {x: -55, y: -18}
   m_SizeDelta: {x: 1236.7556, y: 116.6724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8841766201553472176
