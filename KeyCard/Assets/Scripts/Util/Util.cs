@@ -30,8 +30,8 @@ public class Util
     {
         get
         {
-            Vector3 result = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            result.z = -10;
+            Vector3 result = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, - Camera.main.transform.position.z));
+            //result.z = 0f;
             return result;
         }
     }

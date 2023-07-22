@@ -1,49 +1,92 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    private static bool m_ShuttingDown = false;
-    private static object m_Lock = new object();
-    private static T m_Instance;
+    protected static T _instance = null;
+    static bool isDestroy = false;
 
+    /// <summary>
+    /// 싱글톤이 생성되어있는지 확인하고 생성되어있으면 리턴.
+    /// 생성되어 있지 않으면 생성 후 리턴.
+    /// </summary>
     public static T Instance
     {
         get
         {
-            if (m_ShuttingDown)
-            {
-                Debug.LogWarning($"{typeof(T)} return null");
+            if (isDestroy)
                 return null;
-            }
-
-            lock (m_Lock)
+            if (_instance == null)
             {
-                if (m_Instance == null)
+                _instance = GameObject.FindObjectOfType(typeof(T)) as T;
+                if (_instance == null)
                 {
-                    m_Instance = (T)FindObjectOfType(typeof(T));
-
-                    if (m_Instance == null)
+                    _instance = new GameObject(typeof(T).ToString(), typeof(T)).GetComponent<T>();
+                    if (_instance == null)
                     {
-                        var singletonObject = new GameObject();
-                        m_Instance = singletonObject.AddComponent<T>();
-                        singletonObject.name = typeof(T).ToString() + "(singleton)";
-                        
-                        DontDestroyOnLoad(singletonObject);
+                        // 인스턴스를 생성하지 못했을때 에러.
+                        Debug.LogError("Singleton::Problem during the creation of " + typeof(T).ToString());
                     }
                 }
+                _instance.Init();
             }
-
-            return m_Instance;
+            return _instance;
         }
     }
 
-    private void OnDestroy()
+    public static bool IsCreateInstance()
     {
-        m_ShuttingDown = true;
+        if (_instance == null)
+            return false;
+        return true;
     }
 
-    private void OnApplicationQuit()
+    private void Awake()
     {
-        m_ShuttingDown = true;
+        if (_instance == null)
+        {
+            _instance = this as T;
+            _instance.Init();
+        }
+    }
+
+    /// <summary>
+    /// 싱글톤이 생성될때.
+    /// </summary>
+    public virtual void Init() { }
+
+    /// <summary>
+    /// 싱글톤 해제될때.
+    /// </summary>
+    public virtual void Destory() { }
+
+    void Release()
+    {
+        if (_instance != null)
+        {
+            //Debug.LogFormat("Singleton Release : {0}", name);
+            _instance.Destory();
+            Destroy(_instance.gameObject);
+            _instance = null;
+            //isDestroy = true;
+        }
+        //else
+            //Debug.LogFormat("Singleton Release null : {0}", name);
+
+    }
+
+    /// <summary>
+    /// GameObject 해제.
+    /// </summary>
+    void OnDestroy()
+    {
+        Release();
+    }
+
+    /// <summary>
+    /// 어플리케이션 종료.
+    /// </summary>
+    void OnApplicationQuit()
+    {
+        //Release();
     }
 }

@@ -13,7 +13,6 @@ public class BlackPanelAnimation : MonoBehaviour
 
     public void OnEnablePanel()
     {
-        text.gameObject.SetActive(true);
         descryption.gameObject.SetActive(true);
 
         sequence = DOTween.Sequence();
@@ -32,7 +31,6 @@ public class BlackPanelAnimation : MonoBehaviour
             .Join(text.DOFade(0, 0.5f))
             .OnComplete(() =>
             {
-                text.gameObject.SetActive(false);
                 descryption.gameObject.SetActive(false);
                 gameObject.SetActive(false);
             });
@@ -40,6 +38,7 @@ public class BlackPanelAnimation : MonoBehaviour
 
     private void OnMouseDown()
     {
-        CardManager.Instance.CardSelectCancle();
+        if(!CardManager.Instance.isCardActivating)
+            CardManager.Instance.CardSelectCancle();
     }
 }

@@ -9,6 +9,11 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class TurnManager : Singleton<TurnManager>
 {
+    private void Start()
+    {
+        StartCoroutine(StartGameCo());
+    }
+
     [SerializeField] [Tooltip("시작 카드 개수를 정합니다.")] int startCardCount = 5;
 
     [Header("Properties")]

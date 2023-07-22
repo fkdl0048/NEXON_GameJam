@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 using DG.Tweening;
 
@@ -30,7 +31,7 @@ public class Card : MonoBehaviour
         if (this.isFront)
         {
             nameTMP.text = item.name;
-            cardImage.sprite = item.image;
+            GetComponent<SpriteRenderer>().sprite = item.image;
         }
         else
         {
@@ -62,16 +63,13 @@ public class Card : MonoBehaviour
 
     public IEnumerator MoveTransformCoroutine(PRS prs, bool useDotween, float dotweenTime = 0)
     {
-        keyTMP.text = "";
         if (useDotween)
         {
             Sequence sequence = DOTween.Sequence();
             sequence
                 .Append(transform.DOMove(prs.pos, dotweenTime))
                 .Join(transform.DORotateQuaternion(prs.rot, dotweenTime))
-                .Join(transform.DOScale(prs.scale, dotweenTime))
-                .Join(GetComponent<SpriteRenderer>().DOFade(0, dotweenTime))
-                .Join(nameTMP.GetComponent<TMP_Text>().DOFade(0, dotweenTime));
+                .Join(transform.DOScale(prs.scale, dotweenTime));
         }
         else
         {
@@ -129,7 +127,7 @@ public class Card : MonoBehaviour
     void OnMouseUp()
     {
         if(isFront)
-            CardManager.Instance.CardMouseDown(this);
+            CardManager.Instance.CardMouseUp();
 
     }
 

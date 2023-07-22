@@ -25,6 +25,8 @@ public class CardManager : Singleton<CardManager>
     [SerializeField] TMP_Text descryptionText;
     [SerializeField] ECardState eCardState;
     [SerializeField] ItemSO itemSO;
+    [SerializeField] int cardNumber;
+    enum ECardState { Loading, CanUseCard, ActivatingCard, Noting }
 
     public List<Card> myCards;
     public List<Card> otherCards;
@@ -32,15 +34,21 @@ public class CardManager : Singleton<CardManager>
 
     string[] keyArray = { "A", "S", "D", "F", "G" };
     Card selectCard;
+    Card selectDragCard;
     int currentCardNumber = -1;
     int prevCardNumber = -1;
-    enum ECardState { Loading, CanUseCard, ActivatingCard, Noting }
     bool isSelected;
-    bool isCardActivating;
     bool isCardAppearance;
-
-    bool canDrag;
     bool isCardDrag;
+    bool mouseExitCoolTime;
+
+    public bool isCardActivating;
+    public bool canDrag;
+    public bool canAnswer;
+    GameObject answerObject;
+
+    WaitForSeconds delay = new WaitForSeconds(0.5f);
+    WaitForSeconds delay01 = new WaitForSeconds(0.1f);
 
     // 카드 사용 시 몬스터에게 알려줄 이벤트
     public static Action<bool> EffectPlayBack;
@@ -58,21 +66,21 @@ public class CardManager : Singleton<CardManager>
     // 모든 카드의 정보를 itemBuffer에 입력하고 랜덤으로 섞기
     private void SetupItemBuffer()
     {
-        itemBuffer = new List<Item>(100); // 미리 캐퍼시티 100으로 용량 설정해주면 메모리 효율적으로 사용
-        for (int i = 0; i < itemSO.items.Length; i++)
+        itemBuffer = new List<Item>(cardNumber); // 미리 캐퍼시티 100으로 용량 설정해주면 메모리 효율적으로 사용
+        for (int i = 0; i < cardNumber; i++)
         {
             Item item = itemSO.items[i];
-            for (int j = 0; j < item.percent; j++)
-                itemBuffer.Add(item);
+            //for (int j = 0; j < item.percent; j++)
+            itemBuffer.Add(item);
         }
 
-        for (int i = 0; i < itemBuffer.Count; i++)
-        {
-            int rand = Random.Range(i, itemBuffer.Count);
-            Item temp = itemBuffer[i];
-            itemBuffer[i] = itemBuffer[rand];
-            itemBuffer[rand] = temp;
-        }
+        /*        for (int i = 0; i < itemBuffer.Count; i++)
+                {
+                    int rand = Random.Range(i, itemBuffer.Count);
+                    Item temp = itemBuffer[i];
+                    itemBuffer[i] = itemBuffer[rand];
+                    itemBuffer[rand] = temp;
+                }*/
     }
 
     void Start()
@@ -102,6 +110,8 @@ public class CardManager : Singleton<CardManager>
         StartCoroutine(CardAlignment());
     }
 
+
+
     void SetOriginOrder(bool isMine)
     {
         int count = isMine ? myCards.Count : otherCards.Count;
@@ -116,21 +126,22 @@ public class CardManager : Singleton<CardManager>
     {
         SetEcardState();
 
-        if(isCardDrag)
+        if (isCardDrag)
             CardDrag();
 
-        DetectedCardArea();
+        DetectedAnswer();
     }
 
-    private void CardDrag()
-    {
-        
-    }
-
-    void DetectedCardArea()
+    void DetectedAnswer()
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(Util.MousePos, Vector3.forward);
-        int layer = LayerMask.NameToLayer("CardArea");
+        canAnswer = Array.Exists(hits, x => x.collider.gameObject.tag == "Answer");
+        answerObject = Array.Find(hits, x => x.collider.gameObject.tag == "Answer").transform.gameObject;
+    }
+
+    void CardDrag()
+    {
+        selectDragCard.MoveTransform(new PRS(Util.MousePos, Util.QI, Vector3.one * 0.15f), false);
     }
 
     void InputKey()
@@ -219,7 +230,6 @@ public class CardManager : Singleton<CardManager>
 
     public void EnlargeCard(bool isEnlarge, Card card)
     {
-
         if (isEnlarge)
         {
             Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -1f, -1f);
@@ -235,11 +245,14 @@ public class CardManager : Singleton<CardManager>
         }
 
         card.GetComponent<Order>().SetMostFrontOrder(isEnlarge);
-
     }
 
     void OtherCardsMove(Card card, bool isMove)
     {
+
+        if (isSelected == isMove)
+            return;
+
         int index = myCards.FindIndex(x => x == card);
         if (isMove)
         {
@@ -377,13 +390,13 @@ public class CardManager : Singleton<CardManager>
             blackPanel.SetActive(true);
             blackPanel.GetComponent<BlackPanelAnimation>().OnEnablePanel();
 
+            card.MouseBlock(true);
             card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
             myCards.Remove(card);
             StartCoroutine(CardAlignment());
             descryptionText.text = card.item.descryption;
 
-            yield return new WaitForSeconds(0.5f);
-            card.MouseBlock(true);
+            yield return delay;
             isCardActivating = false;
             // 설명 텍스트 변경
         }
@@ -394,11 +407,12 @@ public class CardManager : Singleton<CardManager>
                 // 취소
                 blackPanel.GetComponent<BlackPanelAnimation>().DisablePanel();
                 myCards.Insert(prevCardNumber, selectCard);
+                SetOriginOrder(selectCard);
                 StartCoroutine(CardAlignment());
                 selectCard = null;
-                descryptionText.text = "";
+                //descryptionText.text = "";
 
-                yield return new WaitForSeconds(0.5f);
+                yield return delay;
                 isCardActivating = false;
                 card.MouseBlock(false);
             }
@@ -407,14 +421,15 @@ public class CardManager : Singleton<CardManager>
                 myCards.Insert(prevCardNumber, selectCard);
                 prevCardNumber = myCards.FindIndex(x => x == card);
                 myCards.Remove(card);
+                SetOriginOrder(selectCard);
                 StartCoroutine(CardAlignment());
+                card.MouseBlock(true);
 
                 card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
                 descryptionText.text = card.item.descryption;
 
-                yield return new WaitForSeconds(0.5f);
+                yield return delay;
                 selectCard.MouseBlock(false);
-                card.MouseBlock(true);
                 selectCard = card;
                 isCardActivating = false;
             }
@@ -485,7 +500,10 @@ public class CardManager : Singleton<CardManager>
         if (isCardActivating || eCardState == ECardState.Loading)
             return;
 
-        EnlargeCard(true, card);
+        selectDragCard = card;
+
+        if (!isSelected)
+            EnlargeCard(true, card);
     }
 
     public void CardMouseExit(Card card)
@@ -493,7 +511,10 @@ public class CardManager : Singleton<CardManager>
         if (isCardActivating || eCardState == ECardState.Loading)
             return;
 
-        EnlargeCard(false, card);
+        if (isSelected && !isCardDrag && !mouseExitCoolTime)
+        {
+            EnlargeCard(false, card);
+        }
     }
 
     public void CardMouseDown(Card card)
@@ -504,10 +525,21 @@ public class CardManager : Singleton<CardManager>
         if (canDrag)
         {
             isCardDrag = true;
+
+            prevCardNumber = myCards.FindIndex(x => x == card);
+
+            myCards.Remove(card);
+            StartCoroutine(CardAlignment());
+
+            for (int i = 0; i < myCards.Count; i++)
+            {
+                Card item = myCards[i];
+                item.MouseBlock(true);
+            }
         }
         else
         {
-            if (!isCardActivating && !canDrag)
+            if (!isCardActivating)
             {
                 StartCoroutine(CardSelectAnimation(card));
             }
@@ -516,8 +548,85 @@ public class CardManager : Singleton<CardManager>
 
     public void CardMouseUp()
     {
-        isCardDrag = false;
+        if (canDrag)
+        {
+            if (!canAnswer)
+                StartCoroutine(MouseUpCoroutine());
+            else
+            {
+                StartCoroutine(AnswerCoroutine());
+            }
+        }
     }
 
     #endregion
+
+    IEnumerator MouseUpCoroutine()
+    {
+        mouseExitCoolTime = true;
+        myCards.Insert(prevCardNumber, selectDragCard);
+        SetOriginOrder(selectDragCard);
+        StartCoroutine(CardAlignment());
+        selectDragCard = null;
+
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            Card item = myCards[i];
+            item.MouseBlock(false);
+        }
+        isCardDrag = false;
+
+        yield return delay01;
+        mouseExitCoolTime = false;
+    }
+
+    IEnumerator AnswerCoroutine()
+    {
+        mouseExitCoolTime = true;
+        selectDragCard.MouseBlock(true);
+        myCards.Remove(selectDragCard);
+
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            Card item = myCards[i];
+            item.MouseBlock(false);
+        }
+
+        if (!answerObject.GetComponent<Answer>().isInput)
+        {
+            answerObject.GetComponent<Answer>().InputAnswer(selectDragCard, prevCardNumber);
+        }
+        else
+        {
+            answerObject.GetComponent<Answer>().ClearAnswer();
+            answerObject.GetComponent<Answer>().InputAnswer(selectDragCard, prevCardNumber);
+        }
+
+        selectDragCard.MoveTransform(new PRS(answerObject.transform.position, answerObject.transform.rotation, answerObject.transform.localScale), false);
+
+        selectDragCard = null;
+        isCardDrag = false;
+
+        yield return delay01;
+        mouseExitCoolTime = false;
+    }
+
+    public IEnumerator CardBackCoroutine(Card card, int prevNum)
+    {
+        mouseExitCoolTime = true;
+        myCards.Insert(prevNum, card);
+        SetOriginOrder(card);
+        StartCoroutine(CardAlignment());
+
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            Card item = myCards[i];
+            item.MouseBlock(false);
+        }
+        isCardDrag = false;
+
+        yield return delay01;
+        mouseExitCoolTime = false;
+    }
+
 }
