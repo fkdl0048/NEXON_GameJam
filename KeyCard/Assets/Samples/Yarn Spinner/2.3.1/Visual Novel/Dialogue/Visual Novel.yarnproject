@@ -3,7 +3,10 @@
   "sourceFiles": [
     "**/*.yarn"
   ],
-  "localisation": {},
-  "baseLanguage": "en",
+  "excludeFiles": [],
+  "localisation": {
+    "en": {}
+  },
+  "baseLanguage": "ko",
   "compilerOptions": {}
 }
