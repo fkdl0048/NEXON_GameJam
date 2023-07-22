@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -249,7 +249,7 @@ public class CardManager : Singleton<CardManager>
                 targetPos.y += curve;
                 targetRot = Quaternion.Slerp(leftTr.rotation, rightTr.rotation, objLerps[i]);
             }
-            results.Add(new PRS(targetPos, targetRot, scale));
+            results.Add(new PRS(targetPos + new Vector3(0, 2f, 0), targetRot, scale));
         }
         return results;
     }
