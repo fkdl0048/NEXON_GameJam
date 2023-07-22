@@ -4,9 +4,7 @@
     "**/*.yarn"
   ],
   "excludeFiles": [],
-  "localisation": {
-    "en": {}
-  },
+  "localisation": {},
   "baseLanguage": "ko",
   "compilerOptions": {}
 }
