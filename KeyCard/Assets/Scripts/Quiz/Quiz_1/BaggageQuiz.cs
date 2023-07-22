@@ -83,7 +83,6 @@ public class BaggageQuiz : MonoBehaviour
         
         if (rightPoliceCount == 2 && rightGoldCount == 2 && rightPrisonerCount == 3)
         {
-            GameManager.Instance.GameState = GameState.Dialogue_2;
             AsyncSceneLoader.LoadScene("Dialogue");
             //Reset();
         }
