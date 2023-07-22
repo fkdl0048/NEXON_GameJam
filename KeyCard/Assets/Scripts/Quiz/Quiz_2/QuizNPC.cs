@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,16 @@ using UnityEngine.UI;
 
 public class QuizNPC : MonoBehaviour
 {
-    private ObjectOutline objectOutline;
+    public ObjectOutline objectOutline;
     
+    public Action<QuizNPC> OnClickAction;
     public bool IsSelected { get; set; } = false;
     
     void Start()
     {
         objectOutline = new ObjectOutline(GetComponent<Image>().material);
+        
+        objectOutline.ObjectOutlineOff();
     }
     
     public void OnClick()
@@ -28,6 +32,8 @@ public class QuizNPC : MonoBehaviour
             objectOutline.ObjectOutlineRed();
             IsSelected = true;
         }
+        
+        OnClickAction?.Invoke(this);
     }
     
     public void OnPointerEnter()

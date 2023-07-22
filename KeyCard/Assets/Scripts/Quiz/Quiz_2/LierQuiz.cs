@@ -22,12 +22,11 @@ public class LierQuiz : MonoBehaviour
 
         if (count == quizNPCs.Length)
         {
-            Debug.Log("정답");
             quizController.DialogueScecne();
         }
         else
         {
-            Debug.Log("오답");
+            AsyncSceneLoader.LoadScene("Quiz");   
         }
     }
     
