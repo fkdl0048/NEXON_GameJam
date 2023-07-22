@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-
+        StartCoroutine(DrawManager.Instance.StartGameCo());
     }
 
     public void PlusCard()
