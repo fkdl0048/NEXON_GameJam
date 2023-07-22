@@ -5980,8 +5980,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tap to Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5982fb6ac8e8ca04d93685b9d7b5152d, type: 2}
-  m_sharedMaterial: {fileID: 8133452912177652048, guid: 5982fb6ac8e8ca04d93685b9d7b5152d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3127d35c017e3d8469ef48f838b800a5, type: 2}
+  m_sharedMaterial: {fileID: -2413506732977481840, guid: 3127d35c017e3d8469ef48f838b800a5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
