@@ -8,11 +8,12 @@ public class JewelsQuiz : MonoBehaviour
     [SerializeField] private QuizNPC[] quizNPCs;
     [SerializeField] private QuizController quizController;
 
-    private void Awake()
+    private void Start()
     {
         foreach (var quizNpC in quizNPCs)
         {
             quizNpC.OnClickAction += CheckOneSelect;
+            quizNpC.objectOutline.ObjectOutlineWhite(); 
         }
     }
 

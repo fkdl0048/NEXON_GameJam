@@ -11,7 +11,7 @@ public class QuizNPC : MonoBehaviour
     public Action<QuizNPC> OnClickAction;
     public bool IsSelected { get; set; } = false;
     
-    void Start()
+    void Awake()
     {
         objectOutline = new ObjectOutline(GetComponent<Image>().material);
         
