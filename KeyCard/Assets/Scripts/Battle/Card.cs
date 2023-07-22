@@ -40,6 +40,8 @@ public class Card : MonoBehaviour
             nameTMP.text = "";
 
         }
+
+        SetOparcity(0);
     }
 
     public void MoveTransform(PRS prs, bool useDotween, float dotweenTime = 0)
@@ -86,6 +88,26 @@ public class Card : MonoBehaviour
         keyTMP.text = keycode;
     }
 
+    public void SetOparcity(float value)
+    {
+        var alpha = GetComponent<SpriteRenderer>().color;
+        alpha.a = value;
+        GetComponent<SpriteRenderer>().color = alpha;
+
+        alpha = nameTMP.GetComponent<TMP_Text>().color;
+        alpha.a = value;
+        nameTMP.GetComponent<TMP_Text>().color = alpha;
+
+        alpha = cardImage.GetComponent<SpriteRenderer>().color;
+        alpha.a = value;
+        cardImage.GetComponent<SpriteRenderer>().color = alpha;
+    }
+
+    public void MouseBlock(bool isActive)
+    {
+        GetComponent<PolygonCollider2D>().enabled = !isActive;
+    }
+
     void OnDisable()
     {
         GetComponent<SpriteRenderer>().color = Color.white;
@@ -100,7 +122,15 @@ public class Card : MonoBehaviour
 
     void OnMouseDown()
     {
-        CardManager.Instance.CardMouseDown(this);
+        if (isFront)
+            CardManager.Instance.CardMouseDown(this);
+    }
+
+    void OnMouseUp()
+    {
+        if(isFront)
+            CardManager.Instance.CardMouseDown(this);
+
     }
 
     void OnMouseExit()

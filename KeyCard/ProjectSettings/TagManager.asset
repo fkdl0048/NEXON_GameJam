@@ -50,3 +50,6 @@ TagManager:
   - name: MapFrontLayer
     uniqueID: 1069955971
     locked: 0
+  - name: Card
+    uniqueID: 2905702497
+    locked: 0

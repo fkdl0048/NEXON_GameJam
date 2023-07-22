@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public class CardManager : Singleton<CardManager>
@@ -18,21 +19,28 @@ public class CardManager : Singleton<CardManager>
     [SerializeField] Transform cardRight;
     [SerializeField] Transform cardsTransform;
     [SerializeField] Transform cardSelectTransform;
+    [SerializeField] Transform cardHandTransform;
 
     [Header("그 외")]
+    [SerializeField] TMP_Text descryptionText;
     [SerializeField] ECardState eCardState;
     [SerializeField] ItemSO itemSO;
 
-    List<Card> myCards;
-    List<Card> otherCards;
+    public List<Card> myCards;
+    public List<Card> otherCards;
     List<Item> itemBuffer;
 
     string[] keyArray = { "A", "S", "D", "F", "G" };
     Card selectCard;
     int currentCardNumber = -1;
+    int prevCardNumber = -1;
     enum ECardState { Loading, CanUseCard, ActivatingCard, Noting }
     bool isSelected;
     bool isCardActivating;
+    bool isCardAppearance;
+
+    bool canDrag;
+    bool isCardDrag;
 
     // 카드 사용 시 몬스터에게 알려줄 이벤트
     public static Action<bool> EffectPlayBack;
@@ -107,7 +115,22 @@ public class CardManager : Singleton<CardManager>
     void Update()
     {
         SetEcardState();
-        InputKey();
+
+        if(isCardDrag)
+            CardDrag();
+
+        DetectedCardArea();
+    }
+
+    private void CardDrag()
+    {
+        
+    }
+
+    void DetectedCardArea()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Util.MousePos, Vector3.forward);
+        int layer = LayerMask.NameToLayer("CardArea");
     }
 
     void InputKey()
@@ -337,18 +360,99 @@ public class CardManager : Singleton<CardManager>
         selectCard = null;
     }
 
-    void CardMoveAnimation(Card card, bool isMove)
+    public void CardSelectCancle()
     {
-        if (isMove)
+        StartCoroutine(CardSelectAnimation(selectCard));
+    }
+
+    IEnumerator CardSelectAnimation(Card card)
+    {
+        isCardActivating = true;
+
+        if (selectCard == null)
         {
+            // 새로 선택
+            selectCard = card;
+            prevCardNumber = myCards.FindIndex(x => x == card);
             blackPanel.SetActive(true);
-            card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.75f);
+            blackPanel.GetComponent<BlackPanelAnimation>().OnEnablePanel();
+
+            card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
+            myCards.Remove(card);
+            StartCoroutine(CardAlignment());
+            descryptionText.text = card.item.descryption;
+
+            yield return new WaitForSeconds(0.5f);
+            card.MouseBlock(true);
+            isCardActivating = false;
+            // 설명 텍스트 변경
         }
         else
         {
-            blackPanel.SetActive(false);
-            card.MoveTransform(card.originPRS, true, 0.5f);
+            if (card == selectCard)
+            {
+                // 취소
+                blackPanel.GetComponent<BlackPanelAnimation>().DisablePanel();
+                myCards.Insert(prevCardNumber, selectCard);
+                StartCoroutine(CardAlignment());
+                selectCard = null;
+                descryptionText.text = "";
+
+                yield return new WaitForSeconds(0.5f);
+                isCardActivating = false;
+                card.MouseBlock(false);
+            }
+            else
+            {
+                myCards.Insert(prevCardNumber, selectCard);
+                prevCardNumber = myCards.FindIndex(x => x == card);
+                myCards.Remove(card);
+                StartCoroutine(CardAlignment());
+
+                card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
+                descryptionText.text = card.item.descryption;
+
+                yield return new WaitForSeconds(0.5f);
+                selectCard.MouseBlock(false);
+                card.MouseBlock(true);
+                selectCard = card;
+                isCardActivating = false;
+            }
         }
+    }
+
+    public void TakeOutControlCoroutine()
+    {
+        if (eCardState == ECardState.Loading)
+            return;
+
+        StartCoroutine(TakeOutCard());
+    }
+
+    public IEnumerator TakeOutCard()
+    {
+        if (isCardAppearance)
+        {
+            for (int i = 0; i < myCards.Count; i++)
+            {
+                Card item = myCards[i];
+                item.SetOparcity(100);
+            }
+            cardsTransform.parent.DOMoveY(-3.7f, 0.5f);
+        }
+        else
+        {
+            var tween = cardsTransform.parent.DOMove(cardsTransform.parent.position + Vector3.up * -3.46f, 0.5f);
+            yield return tween.WaitForCompletion();
+
+            for (int i = 0; i < myCards.Count; i++)
+            {
+                Card item = myCards[i];
+                item.SetOparcity(0);
+            }
+        }
+
+        isCardAppearance = !isCardAppearance;
     }
 
     public void SetKey()
@@ -378,22 +482,41 @@ public class CardManager : Singleton<CardManager>
 
     public void CardMouseOver(Card card)
     {
-        if (isCardActivating)
+        if (isCardActivating || eCardState == ECardState.Loading)
             return;
+
         EnlargeCard(true, card);
     }
 
     public void CardMouseExit(Card card)
     {
-        if (isCardActivating)
+        if (isCardActivating || eCardState == ECardState.Loading)
             return;
+
         EnlargeCard(false, card);
     }
 
     public void CardMouseDown(Card card)
     {
-        isCardActivating = true;
-        CardMoveAnimation(card, true);
+        if (eCardState == ECardState.Loading)
+            return;
+
+        if (canDrag)
+        {
+            isCardDrag = true;
+        }
+        else
+        {
+            if (!isCardActivating && !canDrag)
+            {
+                StartCoroutine(CardSelectAnimation(card));
+            }
+        }
+    }
+
+    public void CardMouseUp()
+    {
+        isCardDrag = false;
     }
 
     #endregion
