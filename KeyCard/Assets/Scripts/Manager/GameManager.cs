@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-        StartCoroutine(TurnManager.instance.StartGameCo());
+        //StartCoroutine(TurnManager.instance.StartGameCo());
     }
 
     private void Update()

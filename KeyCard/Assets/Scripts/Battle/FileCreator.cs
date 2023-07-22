@@ -8,11 +8,9 @@ using System.IO;
 public class FileCreator : MonoBehaviour
 {
     
-
     void Start()
     {
-        test("예아");
-
+        test("사실은 모두가 거짓.");
     }
 
     void test(string msg)
@@ -24,7 +22,7 @@ public class FileCreator : MonoBehaviour
 
         if (System.IO.File.Exists(savePath) == true)
         {
-            System.IO.File.AppendAllText(savePath, $"\r\n:{textValue}", Encoding.Default);
+            System.IO.File.AppendAllText(savePath, $"\r\n{textValue}", Encoding.Default);
         }
         else
         {
