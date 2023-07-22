@@ -49,13 +49,60 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-        //StartCoroutine(TurnManager.Instance.StartGameCo());
+
     }
 
-    // private void Update()
-    // {
-    //     InputKey();
-    // }
+    public void PlusCard()
+    {
+        if (DrawManager.Instance.isSetting)
+        {
+            if (DrawManager.Instance.startCardCount < 6)
+            {
+                DrawManager.Instance.startCardCount += 2;
+                for (int i = 0; i < 2; i++)
+                    DrawManager.OnAddCard?.Invoke(true);
+            }
+        }
+        else
+        {
+            if (DrawManager.Instance.startCardCount < 6)
+                DrawManager.Instance.startCardCount += 2;
+        }
+    }
+
+    public void OpenCloseCards()
+    {
+        if (DrawManager.Instance.isSetting)
+            CardManager.Instance.TakeOutCard();
+        else
+        {
+            if (DrawManager.Instance.startCardCount > 0)
+            {
+                StartCoroutine(GenerateAndOpenCard());
+            }
+            else
+                return;
+        }
+    }
+
+    IEnumerator GenerateAndOpenCard()
+    {
+        yield return StartCoroutine(DrawManager.Instance.StartGameCo());
+        CardManager.Instance.TakeOutCard();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            PlusCard();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            OpenCloseCards();
+        }
+    }
 
     // void InputKey()
     // {
