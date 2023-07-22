@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { Init(); return _instance; } }
 
-    public GameState GameState { get; set; }
+    public GameState GameState { get; set; } = GameState.Title;
 
     static void Init()
     {
