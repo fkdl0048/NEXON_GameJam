@@ -36,6 +36,9 @@ public class DialogueController : MonoBehaviour
     public void QuizScene()
     {
         fadeController.FadeIn();
-        DOVirtual.DelayedCall(1, () => { UnityEngine.SceneManagement.SceneManager.LoadScene("Quiz"); });
+        DOVirtual.DelayedCall(1, () =>
+        {
+            AsyncSceneLoader.LoadScene("Quiz");
+        });
     }
 }

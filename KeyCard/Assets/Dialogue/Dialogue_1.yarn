@@ -1,0 +1,129 @@
+title: D_1Start
+tags: 
+colorID: 0
+position: 0,0
+---
+
+// sets background image to sprite called "bg_office"
+//<<Scene bg_office>>
+// 임시 타이틀
+<<Scene key_visual>> 
+// start playing audioclip "ambient_birds" at 50% volume, loop forever
+<<PlayAudio ambient_birds 0.5 loop>>
+
+<<Act 당신 cool-girl left center #FFFFFF>>
+
+// adds actor named "Eve" using sprite "cool-girl", placed in left-half + center of screen, with green text label
+<<Act 노인 cool-girl left center #FFFFFF>>
+
+당신: 드디어 도착했다...
+
+당신은 전세계의 보물을 휩쓸고 다니는 보물 사냥꾼이다.
+
+1주 전 런던에 도착한 당신은 수소문 끝에 한 저택의 문 앞에 도착하였다.
+
+<<Scene manshion>> 
+
+당신은 떨리는 숨을 고르고 잠시 제자리에 멈추어 혼자 속삭였다.
+
+당신: 운이 좋았지.<br>친절한 런던 주민들의 도움이 아니었다면 이렇게 빨리 도착할 수 없었을거야.
+
+당신은 문을 정중히 세 번 두드리고 기다렸다.
+
+한참을 기다려도 아무 일이 없자 당신은 이내 문을 몇 번 더 강하게 두드렸다.
+
+잠시 뒤 자택의 문이 활짝 열렸다.
+
+당신 앞에 서 있는 백발의 노인.
+
+노인: 들어오시오.
+
+점잖고 단호한 목소리로 그는 당신을 안으로 맞이했다.
+
+한참을 걸을 수 있는 넓은 저택, 당신은 노인의 뒤를 아무 말 없이 따라갔다.
+
+얼마나 걸었을까. 당신은 응접실로 보이는 방에 노인을 따라 들어갔다.
+
+// <Scene manshion_in1>
+
+당신은 문에서 먼 쪽의 의자에 앉았다.
+
+// <Scene manshion_in2>
+
+노인: 멀리서 온 이방인인 것 같은데 용케 이 곳까지 왔군.
+
+노인: 혹시 길을 잃은 건가?
+
+당신: 많은 호의 덕분이죠. 런던에는 신사와 숙녀만이 있는 곳 같습니다.
+
+당신: 다들 어찌나 친절한지!
+
+노인은 살짝 웃어보인 뒤, 붉은 차 한잔을 당신에게 내왔다.
+
+// <Scene manshion_in3>
+
+노인: 런던은 이방인을 언제나 환영하지.
+
+당신은 감사의 의미가 담긴 미소를 노인께 짧게 한 번 보낸 뒤, 차를 한 모금 마셨다.
+
+노인: 이제 본론으로 들어가보세.
+
+노인: 자네가 이곳에 어떻게 오게 되었는지는 따로 말하지 않아도 알고 있네.
+
+노인: 내가 내는 3개의 수수께끼를 풀면 진실에 도달할 수 있을 것일세.
+
+노인: 어떤가. 해볼텐가?
+
+당신은 잠시 목을 가다듬고 결의에 찬 듯한 목소리로 답하였다.
+
+당신: 좋습니다. 해보죠.
+
+당신: 모든 수수께끼를 풀면 꼭 진실을 말해주신다고 약속하셔야 합니다.
+
+노인: 그건 내가 말하지 않아도 알아서 알게 될거야.
+
+노인: 긴 말 하지 않겠네. 시작하지.
+
+// adds actor "Adam" with sprite "biz-guy" off-screen right, with blue-ish text label
+//<<Act Adam biz-guy 1.25 center #FFFFFF>>
+
+// animate Adam into new position in right-half + center, within 0.5 seconds
+// <<Move Adam right center 0.5>>
+<<PlayAudio music_funny 1.0 loop>>
+
+// horizontally flips Eve actor to face Adam
+//<<Flip Eve>>
+
+// Yarn shortcut choices, an easy way to make branching options
+// -> Eve gets upset with Adam// 
+// 	//<<Shake Eve 1.0>>
+// 	Eve: WHAT DO YOU WANT???
+// 	Adam: I just wanted to see if you liked using Yarn Spinner.
+// 	Eve: ... It's fine. Thanks. Now leave me alone.
+// -> Adam asks Eve a question
+//	Adam: Do you think Yarn Spinner is easy to use?
+//	Eve: Not when you're bothering me.
+//	Adam: Oh, I didn't realize you were busy. Sorry.
+
+// hide Adam actor and remove from the scene
+//<<Hide Adam>>
+// Stop all sound playback
+//<<StopAudioAll>>
+
+//<<Flip Eve>>
+//<<PlayAudio music_romantic>>
+
+//<<StopAudioAll>>
+//<<Flip Eve>>
+//<<wait 1.5>>
+//<<Flip Eve>>
+//<<Shake Eve>>
+
+//<<PlayAudio music_funny>>
+//<<Flip Eve>>
+//<<Move Eve 1.25 center 1.0>>
+
+// fade to black, from 0% opacity to 100% opacity, in 2.0 seconds
+<<Fade black 0.0 1.0 2.0>>
+
+===

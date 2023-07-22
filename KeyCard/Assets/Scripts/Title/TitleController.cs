@@ -7,22 +7,25 @@ using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour
 {
     [SerializeField] private FadeController fadeController;
+    private bool isClicked = false;
     
     void Start()
     {
-        
+        GameManager.Instance.GameState = GameState.Title;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && !isClicked)
         {
+            isClicked = true;
             fadeController.FadeIn();
             
-            DOVirtual.DelayedCall(1, () => { SceneManager.LoadScene("Dialogue"); });    
-            
-            //SceneManager.LoadScene("Dialogue");
+            DOVirtual.DelayedCall(1, () =>
+            {
+                AsyncSceneLoader.LoadScene("Dialogue");
+            });
         }
     }
 }
