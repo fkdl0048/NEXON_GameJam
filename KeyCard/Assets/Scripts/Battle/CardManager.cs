@@ -5,29 +5,34 @@ using DG.Tweening;
 using System;
 using Random = UnityEngine.Random;
 
-public class CardManager : MonoBehaviour
+public class CardManager : Singleton<CardManager>
 {
-
+    [Header("오브젝트")]
     [SerializeField] GameObject cardPrefab;
+    [SerializeField] GameObject blackPanel;
+
+    [Header("트랜스 폼")]
     [SerializeField] Transform cardSpawnTrasnform;
     [SerializeField] Transform cardUseTrasnform;
     [SerializeField] Transform cardLeft;
     [SerializeField] Transform cardRight;
     [SerializeField] Transform cardsTransform;
-    [SerializeField] List<Card> myCards;
-    [SerializeField] List<Card> otherCards;
+    [SerializeField] Transform cardSelectTransform;
+
+    [Header("그 외")]
     [SerializeField] ECardState eCardState;
     [SerializeField] ItemSO itemSO;
 
+    List<Card> myCards;
+    List<Card> otherCards;
     List<Item> itemBuffer;
-    List<Card> shuffleCards;
+
     string[] keyArray = { "A", "S", "D", "F", "G" };
     Card selectCard;
     int currentCardNumber = -1;
     enum ECardState { Loading, CanUseCard, ActivatingCard, Noting }
     bool isSelected;
     bool isCardActivating;
-    bool isMonsterAttack;
 
     // 카드 사용 시 몬스터에게 알려줄 이벤트
     public static Action<bool> EffectPlayBack;
@@ -64,11 +69,11 @@ public class CardManager : MonoBehaviour
 
     void Start()
     {
-        SetupItemBuffer();
         TurnManager.OnAddCard += AddCard;
+        SetupItemBuffer();
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         TurnManager.OnAddCard -= AddCard;
     }
@@ -194,17 +199,61 @@ public class CardManager : MonoBehaviour
 
         if (isEnlarge)
         {
-            Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -6.8f, -10f);
-            card.MoveTransform(new PRS(enlargePos, Util.QI, Vector3.one * 1.1f), false);
+            Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -1f, -1f);
+            card.MoveTransform(new PRS(enlargePos, Util.QI, Vector3.one * 0.15f), true, 0.15f);
+            OtherCardsMove(card, true);
             isSelected = isEnlarge;
         }
         else
         {
-            card.MoveTransform(card.originPRS, false);
+            card.MoveTransform(card.originPRS, true, 0.15f);
+            OtherCardsMove(card, false);
             isSelected = isEnlarge;
         }
 
         card.GetComponent<Order>().SetMostFrontOrder(isEnlarge);
+
+    }
+
+    void OtherCardsMove(Card card, bool isMove)
+    {
+        int index = myCards.FindIndex(x => x == card);
+        if (isMove)
+        {
+            if (index == myCards.Count - 1)
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                }
+            }
+            else if (index == 0)
+            {
+                for (int i = 1; i < myCards.Count; i++)
+                {
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                }
+            }
+            else
+            {
+                for (int i = index + 1; i < myCards.Count; i++)
+                {
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                }
+
+                for (int i = index - 1; i >= 0; i--)
+                {
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < myCards.Count; i++)
+            {
+                myCards[i].MoveTransform(myCards[i].originPRS, true, 0.15f);
+            }
+        }
 
     }
 
@@ -281,11 +330,25 @@ public class CardManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TurnManager.instance.ReDrawCards());
+            StartCoroutine(TurnManager.Instance.ReDrawCards());
         }
 
         isCardActivating = false;
         selectCard = null;
+    }
+
+    void CardMoveAnimation(Card card, bool isMove)
+    {
+        if (isMove)
+        {
+            blackPanel.SetActive(true);
+            card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.75f);
+        }
+        else
+        {
+            blackPanel.SetActive(false);
+            card.MoveTransform(card.originPRS, true, 0.5f);
+        }
     }
 
     public void SetKey()
@@ -296,23 +359,42 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void DontUseCard(bool isBool)
-    {
-        isMonsterAttack = isBool;
-    }
-
     void SetEcardState()
     {
-        if (TurnManager.instance.isLoading)
+        if (TurnManager.Instance.isLoading)
             eCardState = ECardState.Loading;
 
         else if (isCardActivating)
             eCardState = ECardState.ActivatingCard;
 
-        else if (myCards.Count > 0 && !TurnManager.instance.isLoading)
+        else if (myCards.Count > 0 && !TurnManager.Instance.isLoading)
             eCardState = ECardState.CanUseCard;
 
         else
             eCardState = ECardState.Noting;
     }
+
+    #region MyCard
+
+    public void CardMouseOver(Card card)
+    {
+        if (isCardActivating)
+            return;
+        EnlargeCard(true, card);
+    }
+
+    public void CardMouseExit(Card card)
+    {
+        if (isCardActivating)
+            return;
+        EnlargeCard(false, card);
+    }
+
+    public void CardMouseDown(Card card)
+    {
+        isCardActivating = true;
+        CardMoveAnimation(card, true);
+    }
+
+    #endregion
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3169323005407727982}
   - component: {fileID: 2289375399790240083}
   - component: {fileID: 8972236058612491100}
+  - component: {fileID: 6246710594611768520}
   m_Layer: 6
   m_Name: Card
   m_TagString: Untagged
@@ -138,6 +139,58 @@ MonoBehaviour:
     name: 
     image: {fileID: 0}
     descryption: 
+--- !u!60 &6246710594611768520
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601543633726114856}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 22.461592, y: 33.19}
+    newSize: {x: 0.47, y: 0.62}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 10.918685, y: -17.831799}
+      - {x: 11.052528, y: -15.849521}
+      - {x: 11.230796, y: -15.395751}
+      - {x: 11.230796, y: 15.379545}
+      - {x: 11.052528, y: 15.849521}
+      - {x: 10.582553, y: 16.351908}
+      - {x: 10.209814, y: 16.530174}
+      - {x: 9.999135, y: 16.578793}
+      - {x: 9.950517, y: 16.595}
+      - {x: -10.031548, y: 16.595}
+      - {x: -10.4691105, y: 16.400526}
+      - {x: -10.631171, y: 16.270878}
+      - {x: -10.9714985, y: 15.930552}
+      - {x: -11.117353, y: 15.68746}
+      - {x: -11.230796, y: 15.363339}
+      - {x: -11.230796, y: -15.298515}
+      - {x: -11.214589, y: -15.379545}
+      - {x: -11.165971, y: -15.574018}
+      - {x: -10.746523, y: -22.90023}
+      - {x: -6.581228, y: -22.809498}
+      - {x: -5.202908, y: -22.862638}
+      - {x: -4.215299, y: -22.914597}
+      - {x: -2.7969131, y: -22.862595}
+      - {x: -0.48522457, y: -22.992678}
+      - {x: 2.8495674, y: -22.913511}
+      - {x: 7.099876, y: -22.949257}
+      - {x: 10.57123, y: -22.977827}
 --- !u!1 &8254113703373789200
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5900515577330605971
 Transform:
   m_ObjectHideFlags: 0

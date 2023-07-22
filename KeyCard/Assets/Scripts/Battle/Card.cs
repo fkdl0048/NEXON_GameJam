@@ -91,4 +91,21 @@ public class Card : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
         nameTMP.GetComponent<TMP_Text>().color = Color.white;
     }
+
+    void OnMouseOver()
+    {
+        if (isFront)
+            CardManager.Instance.CardMouseOver(this);
+    }
+
+    void OnMouseDown()
+    {
+        CardManager.Instance.CardMouseDown(this);
+    }
+
+    void OnMouseExit()
+    {
+        if (isFront)
+            CardManager.Instance.CardMouseExit(this);
+    }
 }

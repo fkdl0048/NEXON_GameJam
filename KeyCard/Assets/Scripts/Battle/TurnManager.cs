@@ -7,10 +7,8 @@ using Random = UnityEngine.Random;
 /// <summary>
 /// 행동 순서 제어
 /// </summary>
-public class TurnManager : MonoBehaviour
+public class TurnManager : Singleton<TurnManager>
 {
-    public static TurnManager instance { get; private set; }
-    void Awake() => instance = this;
 
     [SerializeField] [Tooltip("시작 카드 개수를 정합니다.")] int startCardCount = 5;
 
@@ -34,12 +32,6 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < startCardCount; i++)
         {
             OnAddCard?.Invoke(true);
-            yield return delay025;
-        }
-
-        for (int i = 0; i < startCardCount; i++)
-        {
-            OnAddCard?.Invoke(false);
             yield return delay025;
         }
 
