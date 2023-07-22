@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FadeController : MonoBehaviour
 {
     private Material material;
-    void Start()
+    void Awake()
     {
         material = GetComponentInChildren<Image>().material;
 
@@ -40,6 +40,8 @@ public class FadeController : MonoBehaviour
             material.SetFloat("_FadeAmount", fadeAmount);
             yield return null;
         }
+        
+        material.SetFloat("_FadeAmount", -0.1f);
     }
     
     IEnumerator FadeOutCo()
@@ -51,5 +53,7 @@ public class FadeController : MonoBehaviour
             material.SetFloat("_FadeAmount", fadeAmount);
             yield return null;
         }
+        
+        material.SetFloat("_FadeAmount", 1);
     }
 }

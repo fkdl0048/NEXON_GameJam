@@ -3,11 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    Title,
+    Dialogue_1,
+    Quiz_1,
+    Dialogue_2,
+    Quiz_2,
+    Dialogue_3,
+    Quiz_3,
+    Dialogue_4,
+    Quiz_4,
+    HappyEnddingDialogue,
+    BadEnddingDialogue,
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance { get { Init(); return _instance; } }
-    
+
+    public GameState GameState { get; set; }
+
     static void Init()
     {
         if (_instance == null)
@@ -32,24 +49,24 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-        StartCoroutine(TurnManager.Instance.StartGameCo());
+        //StartCoroutine(TurnManager.Instance.StartGameCo());
     }
 
-    private void Update()
-    {
-        InputKey();
-    }
+    // private void Update()
+    // {
+    //     InputKey();
+    // }
 
-    void InputKey()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            TurnManager.OnAddCard?.Invoke(true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            TurnManager.OnAddCard?.Invoke(true);
-        }
-    }
+    // void InputKey()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Z))
+    //     {
+    //         TurnManager.OnAddCard?.Invoke(true);
+    //     }
+    //
+    //     if (Input.GetKeyDown(KeyCode.X))
+    //     {
+    //         TurnManager.OnAddCard?.Invoke(true);
+    //     }
+    // }
 }
