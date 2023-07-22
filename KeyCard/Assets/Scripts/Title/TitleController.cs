@@ -11,7 +11,7 @@ public class TitleController : MonoBehaviour
     
     void Start()
     {
-        
+        GameManager.Instance.GameState = GameState.Title;
     }
 
     // Update is called once per frame
