@@ -22,6 +22,7 @@ public class LierQuiz : MonoBehaviour
 
         if (count == quizNPCs.Length)
         {
+            GameManager.Instance.GameState = GameState.Quiz_2;
             quizController.DialogueScecne();
         }
         else

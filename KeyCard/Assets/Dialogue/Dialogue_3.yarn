@@ -4,7 +4,7 @@ colorID: 0
 position: 0,0
 ---
 
-<Scene manshion_in3>
+<<Scene manshion_in3>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 

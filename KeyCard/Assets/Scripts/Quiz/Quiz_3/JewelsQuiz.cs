@@ -39,6 +39,7 @@ public class JewelsQuiz : MonoBehaviour
     {
         if (quizNPCs[1].IsSelected)
         {
+            GameManager.Instance.GameState = GameState.Quiz_3;
             quizController.DialogueScecne();
         }
         else

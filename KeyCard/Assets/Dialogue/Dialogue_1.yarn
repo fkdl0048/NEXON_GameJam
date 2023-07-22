@@ -44,11 +44,11 @@ position: 0,0
 
 얼마나 걸었을까. 당신은 응접실로 보이는 방에 노인을 따라 들어갔다.
 
-// <Scene manshion_in1>
+<<Scene manshion_in1>>
 
 당신은 문에서 먼 쪽의 의자에 앉았다.
 
-// <Scene manshion_in2>
+<<Scene manshion_in2>>
 
 노인: 멀리서 온 이방인인 것 같은데 용케 이 곳까지 왔군.
 
@@ -60,7 +60,7 @@ position: 0,0
 
 노인은 살짝 웃어보인 뒤, 붉은 차 한잔을 당신에게 내왔다.
 
-// <Scene manshion_in3>
+<<Scene manshion_in3>>
 
 노인: 런던은 이방인을 언제나 환영하지.
 

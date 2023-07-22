@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 523930892}
   dialogueViews:
   - {fileID: 1564515232}
@@ -4785,8 +4785,7 @@ MonoBehaviour:
   runner: {fileID: 1104307056}
   loadSprites:
   - {fileID: 21300000, guid: 29bbd7792277ef3419dc7b91a4f1255d, type: 3}
-  - {fileID: 21300000, guid: c9b13b9a540951546b1fb019c99542c6, type: 3}
-  - {fileID: 21300000, guid: 889c990e307b0124db2f65a50668203f, type: 3}
+  - {fileID: 21300000, guid: a90246b6bdf57bc4382b8f8eeacf54eb, type: 3}
   loadAudio:
   - {fileID: 8300000, guid: 1f9607a7d89d843439ab1d3467d2f54a, type: 3}
   - {fileID: 8300000, guid: 6076163f000d35246a5a23e13ae9de25, type: 3}
@@ -5241,7 +5240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 1104307055}
   dialogueViews:
   - {fileID: 1057945177}
@@ -5653,7 +5652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 1130190070}
   dialogueViews:
   - {fileID: 153107350}
@@ -6910,9 +6909,11 @@ MonoBehaviour:
   fadeController: {fileID: 393274988}
   dialogueObjects:
   - {fileID: 1086359982452476}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1204192218}
+  - {fileID: 1781670892}
+  - {fileID: 1083475912}
+  - {fileID: 728336243}
+  - {fileID: 1892189609}
 --- !u!1 &1372786387
 GameObject:
   m_ObjectHideFlags: 0
@@ -7866,8 +7867,7 @@ MonoBehaviour:
   runner: {fileID: 523930893}
   loadSprites:
   - {fileID: 21300000, guid: 29bbd7792277ef3419dc7b91a4f1255d, type: 3}
-  - {fileID: 21300000, guid: c9b13b9a540951546b1fb019c99542c6, type: 3}
-  - {fileID: 21300000, guid: 889c990e307b0124db2f65a50668203f, type: 3}
+  - {fileID: 21300000, guid: a90246b6bdf57bc4382b8f8eeacf54eb, type: 3}
   loadAudio:
   - {fileID: 8300000, guid: 1f9607a7d89d843439ab1d3467d2f54a, type: 3}
   - {fileID: 8300000, guid: 6076163f000d35246a5a23e13ae9de25, type: 3}
@@ -9161,8 +9161,7 @@ MonoBehaviour:
   runner: {fileID: 1958442242}
   loadSprites:
   - {fileID: 21300000, guid: 29bbd7792277ef3419dc7b91a4f1255d, type: 3}
-  - {fileID: 21300000, guid: c9b13b9a540951546b1fb019c99542c6, type: 3}
-  - {fileID: 21300000, guid: 889c990e307b0124db2f65a50668203f, type: 3}
+  - {fileID: 21300000, guid: a90246b6bdf57bc4382b8f8eeacf54eb, type: 3}
   loadAudio:
   - {fileID: 8300000, guid: 1f9607a7d89d843439ab1d3467d2f54a, type: 3}
   - {fileID: 8300000, guid: 6076163f000d35246a5a23e13ae9de25, type: 3}
@@ -9467,7 +9466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 1834000532}
   dialogueViews:
   - {fileID: 1204272401}
@@ -10863,7 +10862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 1958442241}
   dialogueViews:
   - {fileID: 1783619819}
@@ -12862,7 +12861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: e7d78c31018f28448a034096822e6edc, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: 5a7c0aec6e65fbf438e3b695ac33752c, type: 3}
   _variableStorage: {fileID: 7112041586605773608}
   dialogueViews:
   - {fileID: 6167349949727089963}
@@ -13065,6 +13064,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 29bbd7792277ef3419dc7b91a4f1255d, type: 3}
   - {fileID: 21300000, guid: c9b13b9a540951546b1fb019c99542c6, type: 3}
   - {fileID: 21300000, guid: 889c990e307b0124db2f65a50668203f, type: 3}
+  - {fileID: 21300000, guid: 0f1cf3ae2a8744c42b334e10d6079fae, type: 3}
+  - {fileID: 21300000, guid: 47b96b356d0472540b2de05bfa510fad, type: 3}
+  - {fileID: 21300000, guid: a90246b6bdf57bc4382b8f8eeacf54eb, type: 3}
   loadAudio:
   - {fileID: 8300000, guid: 1f9607a7d89d843439ab1d3467d2f54a, type: 3}
   - {fileID: 8300000, guid: 6076163f000d35246a5a23e13ae9de25, type: 3}
