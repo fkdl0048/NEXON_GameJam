@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class TurnManager : Singleton<TurnManager>
 {
-
     [SerializeField] [Tooltip("시작 카드 개수를 정합니다.")] int startCardCount = 5;
 
     [Header("Properties")]
@@ -26,18 +25,16 @@ public class TurnManager : Singleton<TurnManager>
     public IEnumerator StartGameCo(float time = 0.5f)
     {
         isLoading = true;
-        yield return delay05;
-
 
         for (int i = 0; i < startCardCount; i++)
         {
             OnAddCard?.Invoke(true);
-            yield return delay025;
         }
 
-        yield return delay05;
-
         isLoading = false;
+        yield return delay025;
+
+        CardManager.Instance.TakeOutControlCoroutine();
     }
 
     public IEnumerator ReDrawCards()

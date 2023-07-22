@@ -7,10 +7,9 @@ using System.IO;
 
 public class FileCreator : MonoBehaviour
 {
-    
     void Start()
     {
-        test("사실은 모두가 거짓.");
+        //test("사실은 모두가 거짓.");
     }
 
     void test(string msg)
