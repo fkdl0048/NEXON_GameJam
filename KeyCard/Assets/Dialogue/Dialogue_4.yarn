@@ -5,12 +5,15 @@ position: 0,0
 ---
 
 <<Scene manshion_in3>>
+<<PlayAudio bgm_03 1.0 loop>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 
 노인: 놀랍군... 축하하네.
 
 노인은 당황한 듯한 표정을 지어 보였다.
+
+<<CardDraw>>
 
 이내 떨떠름한 표정으로 마지못해 마지막 2장의 카드를 당신에게 주었다.
 

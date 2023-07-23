@@ -5,8 +5,12 @@ position: 0,0
 ---
 
 <<Scene manshion_in3>>
+<<PlayAudio bgm_02 1.0 loop>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
+
+<<CardDraw>>
+<<CardAble>>
 
 노인: 비열한 도둑이 나쁜 짓을 못하게 막았군.
 
@@ -15,9 +19,6 @@ position: 0,0
 노인: 대영제국에서 악은 정의를 이길 수 없지.
 
 노인: 수수께끼를 해결했으니 진실에 도달하는데에 도움을 줄 2장의 카드를 주도록 하지.
-
-<<CardAble>>
-<<CardDraw>>
 
 노인: 앞으로도 내가 내는 수수께끼를 풀어낼 때마다 2장씩 카드를 주겠네.
 

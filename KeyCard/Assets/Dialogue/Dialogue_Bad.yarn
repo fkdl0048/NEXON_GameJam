@@ -4,7 +4,8 @@ colorID: 0
 position: 0,0
 ---
 
-<Scene manshion_in3>
+<<Scene manshion_in3>>
+<<PlayAudio bgm_05 1.0 loop>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 
@@ -12,9 +13,9 @@ position: 0,0
 
 당신은 말을 끝낸 바로 직후 명치 쪽을 급히 부여잡았다.	
 
-노인: 준비한 차의 효과가 이제야 돌기 시작했군.	
+노인: 준비한 차의 효과가 이제야 돌기 시작했군.
 
-<Scene death>
+<<Scene death>>
 
 피를 토하는 소리가 응접실 내에 울려 퍼졌고, 바닥에는 유혈이 낭자해졌다.	
 
