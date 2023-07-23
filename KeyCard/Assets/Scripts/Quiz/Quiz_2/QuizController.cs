@@ -26,7 +26,7 @@ public class QuizController : MonoBehaviour
                 quizObjects[2].SetActive(true);
                 break;
             case GameState.Dialogue_4:
-                SceneManager.LoadScene("Develop", LoadSceneMode.Additive);
+                SceneManager.LoadScene("Quiz4", LoadSceneMode.Additive);
                 GameManager.Instance.GameState = GameState.Quiz_4; // 수정해야함
                 break;
         }
