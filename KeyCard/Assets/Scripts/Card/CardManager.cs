@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using TMPro;
@@ -22,7 +23,7 @@ public class CardManager : Singleton<CardManager>
     [SerializeField] Transform cardHandTransform;
 
     [Header("그 외")]
-    [SerializeField] TMP_Text descryptionText;
+    [SerializeField] Image descryptionImage;
     [SerializeField] ECardState eCardState;
     [SerializeField] ItemSO itemSO;
     [SerializeField] int cardNumber;
@@ -396,7 +397,7 @@ public class CardManager : Singleton<CardManager>
             card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
             myCards.Remove(card);
             StartCoroutine(CardAlignment());
-            descryptionText.text = card.item.descryption;
+            descryptionImage.sprite = card.item.descryption;
 
             yield return delay;
             isCardActivating = false;
@@ -428,7 +429,7 @@ public class CardManager : Singleton<CardManager>
                 card.MouseBlock(true);
 
                 card.MoveTransform(new PRS(cardSelectTransform.position, Util.QI, Vector3.one * 0.15f), true, 0.5f);
-                descryptionText.text = card.item.descryption;
+                descryptionImage.sprite = card.item.descryption;
 
                 yield return delay;
                 selectCard.MouseBlock(false);

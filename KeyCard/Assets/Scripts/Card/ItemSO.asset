@@ -17,29 +17,29 @@ MonoBehaviour:
     percent: 25
     name: "\uB7F0\uB358"
     image: {fileID: 21300000, guid: 54aeb8c71470f4a4da7033a10fd5f3af, type: 3}
-    descryption: "\uB7F0\uB358"
+    descryption: {fileID: 21300000, guid: bfd27373508734c4893cdb750c2473ac, type: 3}
   - id: 2
     percent: 25
     name: "\uB3C4\uB451"
     image: {fileID: 21300000, guid: 433132b4541b7ab4aac9b896314a3af8, type: 3}
-    descryption: "\uB3C4\uB451\uC774\uB2E4."
+    descryption: {fileID: 21300000, guid: 5e912d21db2514948bb522fbfe3c2a78, type: 3}
   - id: 3
     percent: 25
     name: "\uBAA8\uB4E0 \uC0AC\uB78C"
     image: {fileID: 21300000, guid: 4685610171091cb4897f9c53fd106580, type: 3}
-    descryption: "\uBAA8\uB4E0 \uC0AC\uB78C\uC774\uB2E4."
+    descryption: {fileID: 21300000, guid: 0cd0449480f4bb34b879160a9b022ee6, type: 3}
   - id: 4
     percent: 25
     name: "\uAC70\uC9D3\uB9D0\uC7C1\uC774"
     image: {fileID: 21300000, guid: faf0b8c415cf5ce40a120a569a2d9231, type: 3}
-    descryption: "\uAC70\uC9D3\uB9D0\uC7C1\uC774\uB2E4."
+    descryption: {fileID: 21300000, guid: 39dd9b13f8a400d45bcf14f632a5e21f, type: 3}
   - id: 5
     percent: 25
     name: "\uBCF4\uBB3C"
     image: {fileID: 21300000, guid: 3de76dfeccb8c28468d142175b7fc143, type: 3}
-    descryption: "\uBCF4\uBB3C\uC774\uB2E4."
+    descryption: {fileID: 21300000, guid: 8cbedd881ac49b44393b90570e2b3fa9, type: 3}
   - id: 6
     percent: 25
     name: "\uB8E8\uBE44"
     image: {fileID: 21300000, guid: c425119cacca2ea449224c4ef2f76633, type: 3}
-    descryption: "\uB8E8\uBE44\uB2E4."
+    descryption: {fileID: 21300000, guid: 66bbce0de7781574788a2425dbfa3aab, type: 3}

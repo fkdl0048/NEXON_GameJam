@@ -13,7 +13,7 @@ public class Item
     public float percent;
     public string name;
     public Sprite image;
-    public string descryption;
+    public Sprite descryption;
 }
 
 
