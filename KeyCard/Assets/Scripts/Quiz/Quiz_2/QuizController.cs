@@ -12,7 +12,7 @@ public class QuizController : MonoBehaviour
     void Start()
     {
         fadeController.FadeOut();
-        SceneManager.LoadScene("Quiz4", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("Quiz4", LoadSceneMode.Additive);
 
         switch (GameManager.Instance.GameState)
         {
