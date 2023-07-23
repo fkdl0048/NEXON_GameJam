@@ -4,7 +4,8 @@ colorID: 0
 position: 0,0
 ---
 
-<Scene manshion_in3>
+<<Scene manshion_in3>>
+<<PlayAudio bgm_05 1.0 loop>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 
@@ -14,7 +15,7 @@ position: 0,0
 
 노인: 준비한 차의 효과가 이제야 돌기 시작했군.	
 
-death
+<<Scene death>>
 
 피를 토하는 소리가 응접실 내에 울려 퍼졌고, 바닥에는 유혈이 낭자해졌다.	
 
@@ -26,15 +27,15 @@ death
 
 노인: 자네가 풀었던 수수께끼에 담긴 의미를 알려주도록 하지.
 
-Select_Jewlery
+<<Scene Select_Jewlery_past>>
 
 노인: 먼저 세 번째 수수께끼는 말 그대로일세. 우리 런던이 숨기고 있는 보물은 루비가 맞네.	
 
-Lier_Quiz
+<<Scene Lier_Quiz_past>>
 
 노인: 두 번째 수수께끼는 복선이었지. 모든 사람이 거짓말쟁이라는 것.
 
-london_bridge
+<<Scene london_bridge_past>>
 
 노인: 첫 번째 수수께끼는 간단한 비유일세.
 
@@ -44,7 +45,7 @@ london_bridge
 
 노인: 타지에서 온 도둑이 몇백 년간 지켜온 우리의 것을 가져가게 둘 수 없지.
 
-manshion
+<<Scene manshion>>
 
 노인: 우리 모두는 이 보물을 지키기 위해 수단과 방법을 가리지 않고 있네.	
 
@@ -52,7 +53,7 @@ manshion
 
 노인: 자네가 이 으슥한 곳까지 순조롭게 올 수 있었던 것도 우리의 계획대로였네.
 
-death
+<<Scene death>>
 
 ... ...	
 

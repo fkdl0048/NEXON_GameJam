@@ -9,7 +9,7 @@ position: 0,0
 // 임시 타이틀
 <<Scene key_visual>> 
 // start playing audioclip "ambient_birds" at 50% volume, loop forever
-<<PlayAudio ambient_birds 0.5 loop>>
+//<<PlayAudio ambient_birds 0.5 loop>>
 
 <<Act 당신 cool-girl left center #FFFFFF>>
 
@@ -45,6 +45,8 @@ position: 0,0
 얼마나 걸었을까. 당신은 응접실로 보이는 방에 노인을 따라 들어갔다.
 
 <<Scene manshion_in1>>
+
+<<PlayAudio bgm_02 1.0 loop>>
 
 당신은 문에서 먼 쪽의 의자에 앉았다.
 
@@ -89,7 +91,7 @@ position: 0,0
 
 // animate Adam into new position in right-half + center, within 0.5 seconds
 // <<Move Adam right center 0.5>>
-<<PlayAudio music_funny 1.0 loop>>
+//<<PlayAudio music_funny 1.0 loop>>
 
 // horizontally flips Eve actor to face Adam
 //<<Flip Eve>>

@@ -5,6 +5,7 @@ position: 0,0
 ---
 
 <<Scene manshion_in3>>
+<<PlayAudio bgm_03 1.0 loop>>
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 
@@ -19,6 +20,8 @@ position: 0,0
 노인은 무아지경으로 얘기하다가 정신이 든듯하다.
 
 노인: 아차. 내 정신 좀 보게. 여기 카드 2장일세.
+
+<<CardDraw>>
 
 섬뜩한 눈이 그려진 2장의 카드가 당신의 손에 쥐어졌다.
 
