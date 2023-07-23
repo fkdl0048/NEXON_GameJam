@@ -39,6 +39,12 @@ public class DialogueController : Singleton<DialogueController>
                 dialogueObjects[3].SetActive(true);
                 GameManager.Instance.GameState = GameState.Dialogue_4;
                 break;
+            case GameState.BadEnddingDialogue:
+                dialogueObjects[4].SetActive(true);
+                break;
+            case GameState.HappyEnddingDialogue:
+                dialogueObjects[5].SetActive(true);
+                break;
         }
     }
 

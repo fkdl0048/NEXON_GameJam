@@ -54,18 +54,16 @@ public class AnswerChecker : Singleton<AnswerChecker>
 
         if (real)
         {
-            Debug.Log("�� ����");
+            GameManager.Instance.GameState = GameState.HappyEnddingDialogue;
             quizController.DialogueScecne();
         }
         else if (fake)
         {
-            Debug.Log("��¥����");
+            GameManager.Instance.GameState = GameState.BadEnddingDialogue;
             quizController.DialogueScecne();
         }
         else
         {
-            Debug.Log("����");
-
             playerAnswer.Clear();
 
             foreach (var item in answers)
