@@ -52,6 +52,7 @@ public class CardManager : Singleton<CardManager>
 
     // 카드 사용 시 몬스터에게 알려줄 이벤트
     public static Action<bool> EffectPlayBack;
+    private bool isMove;
 
     public Item PopItem()
     {
@@ -442,11 +443,13 @@ public class CardManager : Singleton<CardManager>
         if (eCardState == ECardState.Loading)
             return;
 
-        StartCoroutine(TakeOutCard());
+        if(!isMove)
+            StartCoroutine(TakeOutCard());
     }
 
     public IEnumerator TakeOutCard()
     {
+        isMove = true;
         if (isCardAppearance)
         {
             for (int i = 0; i < myCards.Count; i++)
@@ -454,7 +457,9 @@ public class CardManager : Singleton<CardManager>
                 Card item = myCards[i];
                 item.SetOparcity(100);
             }
-            cardsTransform.parent.DOMoveY(-3.7f, 0.5f);
+            var tween = cardsTransform.parent.DOMoveY(-3.7f, 0.5f);
+            yield return tween.WaitForCompletion();
+            isMove = false;
         }
         else
         {
@@ -466,7 +471,9 @@ public class CardManager : Singleton<CardManager>
                 Card item = myCards[i];
                 item.SetOparcity(0);
             }
+            isMove = false;
         }
+
 
         isCardAppearance = !isCardAppearance;
     }

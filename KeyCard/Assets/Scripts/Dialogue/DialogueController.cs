@@ -61,16 +61,15 @@ public class DialogueController : Singleton<DialogueController>
 
     public void PlusCard()
     {
-        if (!first)
-        {
-
-            button.interactable = true;
-            return;
-        }
         if (count < 6)
         {
             for (int i = 0; i < 2; i++)
                 TurnManager.OnAddCard?.Invoke(true);
         }
+    }
+
+    public void ButtonInteratcive()
+    {
+        button.interactable = !button.interactable;
     }
 }

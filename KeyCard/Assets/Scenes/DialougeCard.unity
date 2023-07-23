@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 244141276}
   - component: {fileID: 244141275}
   - component: {fileID: 244141274}
+  - component: {fileID: 244141277}
   m_Layer: 5
   m_Name: DeckOpen_Button
   m_TagString: DeckOpenButton
@@ -467,6 +468,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244141272}
   m_CullTransparentMesh: 1
+--- !u!114 &244141277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244141272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76f8e48104e35747886a61c49c7fe90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &269336928
 GameObject:
   m_ObjectHideFlags: 0
