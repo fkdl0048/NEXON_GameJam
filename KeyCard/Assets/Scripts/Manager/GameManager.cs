@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-
-        SceneManager.LoadScene("DialougeCard", LoadSceneMode.Additive);
     }
 /*
     public void PlusCard()

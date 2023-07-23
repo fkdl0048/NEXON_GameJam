@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class DialogueController : MonoBehaviour
     
     void Start()
     {
+        SceneManager.LoadScene("DialougeCard", LoadSceneMode.Additive);
+
         fadeController.FadeOut();
 
         switch (GameManager.Instance.GameState)
