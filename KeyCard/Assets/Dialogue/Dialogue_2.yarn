@@ -9,6 +9,9 @@ position: 0,0
 <<Act 당신 cool-girl left center #FFFFFF>>
 <<Act 노인 cool-girl left center #FFFFFF>>
 
+<<CardDraw>>
+<<CardAble>>
+
 노인: 비열한 도둑이 나쁜 짓을 못하게 막았군.
 
 노인이 호쾌하게 웃었다.
