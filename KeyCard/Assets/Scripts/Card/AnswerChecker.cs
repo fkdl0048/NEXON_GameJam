@@ -33,6 +33,12 @@ public class AnswerChecker : Singleton<AnswerChecker>
 
     public void AnswerCheck()
     {
+        foreach (var player in answers)
+        {
+            if (!player.isInput)
+                return;
+        }
+        
         if (playerAnswer == null)
         {
             return;
@@ -48,17 +54,17 @@ public class AnswerChecker : Singleton<AnswerChecker>
 
         if (real)
         {
-            Debug.Log("Áø ¿£µù");
+            Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             quizController.DialogueScecne();
         }
         else if (fake)
         {
-            Debug.Log("°¡Â¥¿£µù");
+            Debug.Log("ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½");
             quizController.DialogueScecne();
         }
         else
         {
-            Debug.Log("½ÇÆÐ");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
 
             playerAnswer.Clear();
 
@@ -67,9 +73,9 @@ public class AnswerChecker : Singleton<AnswerChecker>
                 item.ClearAnswer();
             }
 
-            quizController.DialogueScecne();
+            //quizController.DialogueScecne();
 
-            // ÀçµµÀü~
+            // ï¿½çµµï¿½ï¿½~
         }
     }
 }
