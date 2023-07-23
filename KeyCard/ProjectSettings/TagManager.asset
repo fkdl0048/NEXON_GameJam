@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Answer
   - Quiz
+  - DeckOpenButton
   layers:
   - Default
   - TransparentFX

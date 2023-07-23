@@ -14,7 +14,7 @@ public class TurnManager : Singleton<TurnManager>
         StartCoroutine(StartGameCo());
     }
 
-    [SerializeField] [Tooltip("시작 카드 개수를 정합니다.")] int startCardCount = 5;
+    [SerializeField] [Tooltip("시작 카드 개수를 정합니다.")] public int startCardCount = 5;
 
     [Header("Properties")]
     public bool isLoading; // 카드 사용 방지, 몬스터 공격 방지
