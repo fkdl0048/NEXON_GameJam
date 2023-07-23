@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -49,34 +50,35 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-        StartCoroutine(DrawManager.Instance.StartGameCo());
-    }
 
+        SceneManager.LoadScene("DialougeCard", LoadSceneMode.Additive);
+    }
+/*
     public void PlusCard()
     {
-        if (DrawManager.Instance.isSetting)
+        if (TurnManager.Instance.isSetting)
         {
-            if (DrawManager.Instance.startCardCount < 6)
+            if (TurnManager.Instance.startCardCount < 6)
             {
-                DrawManager.Instance.startCardCount += 2;
+                TurnManager.Instance.startCardCount += 2;
                 for (int i = 0; i < 2; i++)
-                    DrawManager.OnAddCard?.Invoke(true);
+                    TurnManager.OnAddCard?.Invoke(true);
             }
         }
         else
         {
-            if (DrawManager.Instance.startCardCount < 6)
-                DrawManager.Instance.startCardCount += 2;
+            if (TurnManager.Instance.startCardCount < 6)
+                TurnManager.Instance.startCardCount += 2;
         }
     }
 
     public void OpenCloseCards()
     {
-        if (DrawManager.Instance.isSetting)
+        if (TurnManager.Instance.isSetting)
             CardManager.Instance.TakeOutCard();
         else
         {
-            if (DrawManager.Instance.startCardCount > 0)
+            if (TurnManager.Instance.startCardCount > 0)
             {
                 StartCoroutine(GenerateAndOpenCard());
             }
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GenerateAndOpenCard()
     {
-        yield return StartCoroutine(DrawManager.Instance.StartGameCo());
+        yield return StartCoroutine(TurnManager.Instance.StartGameCo());
         CardManager.Instance.TakeOutCard();
     }
 
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
             OpenCloseCards();
         }
     }
-
+*/
     // void InputKey()
     // {
     //     if (Input.GetKeyDown(KeyCode.Z))

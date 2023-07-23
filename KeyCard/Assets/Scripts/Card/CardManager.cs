@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -32,9 +32,10 @@ public class CardManager : Singleton<CardManager>
     public List<Card> otherCards;
     List<Item> itemBuffer;
 
+    string[] keyArray = { "A", "S", "D", "F", "G" };
     Card selectCard;
     Card selectDragCard;
-
+    int currentCardNumber = -1;
     int prevCardNumber = -1;
     bool isSelected;
     bool isCardAppearance;
@@ -48,6 +49,9 @@ public class CardManager : Singleton<CardManager>
 
     WaitForSeconds delay = new WaitForSeconds(0.5f);
     WaitForSeconds delay01 = new WaitForSeconds(0.1f);
+
+    // 카드 사용 시 몬스터에게 알려줄 이벤트
+    public static Action<bool> EffectPlayBack;
 
     public Item PopItem()
     {
@@ -81,13 +85,13 @@ public class CardManager : Singleton<CardManager>
 
     void Start()
     {
-        DrawManager.OnAddCard += AddCard;
+        TurnManager.OnAddCard += AddCard;
         SetupItemBuffer();
     }
 
     void OnDestroy()
     {
-        DrawManager.OnAddCard -= AddCard;
+        TurnManager.OnAddCard -= AddCard;
     }
 
     void AddCard(bool isMine)
@@ -105,6 +109,8 @@ public class CardManager : Singleton<CardManager>
         SetOriginOrder(isMine);
         StartCoroutine(CardAlignment());
     }
+
+
 
     void SetOriginOrder(bool isMine)
     {
@@ -139,12 +145,96 @@ public class CardManager : Singleton<CardManager>
         selectDragCard.MoveTransform(new PRS(Util.MousePos, Util.QI, Vector3.one * 0.15f), false);
     }
 
+    void InputKey()
+    {
+        if (eCardState == ECardState.CanUseCard)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+                ChoiceCard(0);
+            else if (Input.GetKeyDown(KeyCode.S))
+                ChoiceCard(1);
+            else if (Input.GetKeyDown(KeyCode.D))
+                ChoiceCard(2);
+            else if (Input.GetKeyDown(KeyCode.F))
+                ChoiceCard(3);
+            else if (Input.GetKeyDown(KeyCode.G))
+                ChoiceCard(4);
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                ChoiceCardWithKeyboard(-1);
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+                ChoiceCardWithKeyboard(1);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (isSelected)
+                    StartCoroutine(UseCard());
+            }
+        }
+    }
+
+    void ChoiceCard(int index)
+    {
+        if (index >= myCards.Count)
+            return;
+
+        if (selectCard == myCards[index])
+        {
+            SelectAndEnlarge(selectCard, true);
+            return;
+        }
+        else
+        {
+            if (selectCard != null)
+                EnlargeCard(false, selectCard);
+
+            SelectAndEnlarge(myCards[index], true);
+        }
+    }
+
+    void ChoiceCardWithKeyboard(int arrowDirection)
+    {
+        if (myCards.Count <= 0)
+            return;
+
+        if (selectCard != null)
+            EnlargeCard(false, selectCard);
+
+        if (myCards.Count == 1 || currentCardNumber == -1)
+        {
+            SelectAndEnlarge(myCards[0], true);
+        }
+        else
+        {
+            var trueNum = currentCardNumber + arrowDirection;
+
+            if (trueNum < 0)
+            {
+                SelectAndEnlarge(myCards[myCards.Count - 1], true);
+                return;
+            }
+            else if (trueNum >= myCards.Count)
+            {
+                SelectAndEnlarge(myCards[0], true);
+                return;
+            }
+            SelectAndEnlarge(myCards[trueNum], true);
+        }
+    }
+
+    void SelectAndEnlarge(Card card, bool isSelecting)
+    {
+        EnlargeCard(true, card);
+        selectCard = card;
+        currentCardNumber = myCards.FindIndex(x => x == card);
+    }
+
     public void EnlargeCard(bool isEnlarge, Card card)
     {
         if (isEnlarge)
         {
-            Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -2f, -1f);
-            card.MoveTransform(new PRS(enlargePos, Util.QI, Vector3.one * 0.11f), true, 0.15f);
+            Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -1f, -1f);
+            card.MoveTransform(new PRS(enlargePos, Util.QI, Vector3.one * 0.15f), true, 0.15f);
             OtherCardsMove(card, true);
             isSelected = isEnlarge;
         }
@@ -171,26 +261,26 @@ public class CardManager : Singleton<CardManager>
             {
                 for (int i = 0; i < index; i++)
                 {
-                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -0.5f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
                 }
             }
             else if (index == 0)
             {
                 for (int i = 1; i < myCards.Count; i++)
                 {
-                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 0.5f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
                 }
             }
             else
             {
                 for (int i = index + 1; i < myCards.Count; i++)
                 {
-                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 0.5f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * 1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
                 }
 
                 for (int i = index - 1; i >= 0; i--)
                 {
-                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -0.5f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
+                    myCards[i].MoveTransform(new PRS(myCards[i].originPRS.pos + Vector3.right * -1f, myCards[i].originPRS.rot, Vector3.one * 0.1f), true, 0.15f);
                 }
             }
         }
@@ -249,9 +339,39 @@ public class CardManager : Singleton<CardManager>
                 targetPos.y += curve;
                 targetRot = Quaternion.Slerp(leftTr.rotation, rightTr.rotation, objLerps[i]);
             }
-            results.Add(new PRS(targetPos + new Vector3(0, 2f, 0), targetRot, scale));
+            results.Add(new PRS(targetPos, targetRot, scale));
         }
         return results;
+    }
+
+    IEnumerator UseCard()
+    {
+        if (selectCard == null)
+            yield break;
+        isCardActivating = true;
+        EnlargeCard(true, selectCard);
+        myCards.Remove(selectCard);
+
+        yield return StartCoroutine(selectCard.MoveTransformCoroutine(new PRS(cardUseTrasnform.position, Util.QI, selectCard.originPRS.scale), true, 0.5f));
+        selectCard.DOKill();
+
+        if (myCards.Count == 1)
+            currentCardNumber = -1;
+        else
+            currentCardNumber -= 1;
+
+        if (myCards.Count > 0)
+        {
+            StartCoroutine(CardAlignment());
+            SetKey();
+        }
+        else
+        {
+            StartCoroutine(TurnManager.Instance.ReDrawCards());
+        }
+
+        isCardActivating = false;
+        selectCard = null;
     }
 
     public void CardSelectCancle()
@@ -334,11 +454,11 @@ public class CardManager : Singleton<CardManager>
                 Card item = myCards[i];
                 item.SetOparcity(100);
             }
-            cardsTransform.parent.DOMoveY(-5f, 0.5f);
+            cardsTransform.parent.DOMoveY(-3.7f, 0.5f);
         }
         else
         {
-            var tween = cardsTransform.parent.DOMoveY(-9f, 0.5f);
+            var tween = cardsTransform.parent.DOMove(cardsTransform.parent.position + Vector3.up * -3.46f, 0.5f);
             yield return tween.WaitForCompletion();
 
             for (int i = 0; i < myCards.Count; i++)
@@ -351,20 +471,96 @@ public class CardManager : Singleton<CardManager>
         isCardAppearance = !isCardAppearance;
     }
 
+    public void SetKey()
+    {
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            myCards[i].SetKey(keyArray[i]);
+        }
+    }
+
     void SetEcardState()
     {
-        if (DrawManager.Instance.isLoading)
+        if (TurnManager.Instance.isLoading)
             eCardState = ECardState.Loading;
 
         else if (isCardActivating)
             eCardState = ECardState.ActivatingCard;
 
-        else if (myCards.Count > 0 && !DrawManager.Instance.isLoading)
+        else if (myCards.Count > 0 && !TurnManager.Instance.isLoading)
             eCardState = ECardState.CanUseCard;
 
         else
             eCardState = ECardState.Noting;
     }
+
+    #region MyCard
+
+    public void CardMouseOver(Card card)
+    {
+        if (isCardActivating || eCardState == ECardState.Loading)
+            return;
+
+        selectDragCard = card;
+
+        if (!isSelected)
+            EnlargeCard(true, card);
+    }
+
+    public void CardMouseExit(Card card)
+    {
+        if (isCardActivating || eCardState == ECardState.Loading)
+            return;
+
+        if (isSelected && !isCardDrag && !mouseExitCoolTime)
+        {
+            EnlargeCard(false, card);
+        }
+    }
+
+    public void CardMouseDown(Card card)
+    {
+        if (eCardState == ECardState.Loading)
+            return;
+
+        if (canDrag)
+        {
+            isCardDrag = true;
+
+            prevCardNumber = myCards.FindIndex(x => x == card);
+
+            myCards.Remove(card);
+            StartCoroutine(CardAlignment());
+
+            for (int i = 0; i < myCards.Count; i++)
+            {
+                Card item = myCards[i];
+                item.MouseBlock(true);
+            }
+        }
+        else
+        {
+            if (!isCardActivating)
+            {
+                StartCoroutine(CardSelectAnimation(card));
+            }
+        }
+    }
+
+    public void CardMouseUp()
+    {
+        if (canDrag)
+        {
+            if (!canAnswer)
+                StartCoroutine(MouseUpCoroutine());
+            else
+            {
+                StartCoroutine(AnswerCoroutine());
+            }
+        }
+    }
+
+    #endregion
 
     IEnumerator MouseUpCoroutine()
     {
@@ -433,74 +629,5 @@ public class CardManager : Singleton<CardManager>
         yield return delay01;
         mouseExitCoolTime = false;
     }
-
-    #region MyCard
-
-    public void CardMouseOver(Card card)
-    {
-        if (isCardActivating || eCardState == ECardState.Loading)
-            return;
-
-        selectDragCard = card;
-
-        if (!isSelected)
-            EnlargeCard(true, card);
-    }
-
-    public void CardMouseExit(Card card)
-    {
-        if (isCardActivating || eCardState == ECardState.Loading)
-            return;
-
-        if (isSelected && !isCardDrag && !mouseExitCoolTime)
-        {
-            EnlargeCard(false, card);
-        }
-    }
-
-    public void CardMouseDown(Card card)
-    {
-        if (eCardState == ECardState.Loading)
-            return;
-
-        if (canDrag)
-        {
-            isCardDrag = true;
-            selectDragCard.GetComponent<Order>().SetMostFrontOrder(true);
-
-            prevCardNumber = myCards.FindIndex(x => x == card);
-
-            myCards.Remove(card);
-            StartCoroutine(CardAlignment());
-
-            for (int i = 0; i < myCards.Count; i++)
-            {
-                Card item = myCards[i];
-                item.MouseBlock(true);
-            }
-        }
-        else
-        {
-            if (!isCardActivating)
-            {
-                StartCoroutine(CardSelectAnimation(card));
-            }
-        }
-    }
-
-    public void CardMouseUp()
-    {
-        if (canDrag)
-        {
-            if (!canAnswer)
-                StartCoroutine(MouseUpCoroutine());
-            else
-            {
-                StartCoroutine(AnswerCoroutine());
-            }
-        }
-    }
-
-    #endregion
 
 }

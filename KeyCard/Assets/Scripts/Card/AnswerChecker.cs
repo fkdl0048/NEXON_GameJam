@@ -7,20 +7,37 @@ using System.Linq;
 public class AnswerChecker : Singleton<AnswerChecker>
 {
     [SerializeField] Answer[] answers;
+    [SerializeField] QuizController quizController;
 
     List<int> playerAnswer;
     List<int> realAnswer;
     List<int> fakeAnswer;
+
+    public bool isDialogueScene;
 
     private void Start()
     {
         playerAnswer = new List<int>();
         realAnswer = new List<int>() { 1, 3, 4 };
         fakeAnswer = new List<int>() { 1, 5, 6 };
+
+        if(isDialogueScene)
+            StartCoroutine(GetQuizController());
+    }
+
+    IEnumerator GetQuizController()
+    {
+        yield return new WaitForEndOfFrame();
+        quizController = GameObject.FindWithTag("Quiz").GetComponent<QuizController>();
     }
 
     public void AnswerCheck()
     {
+        if (playerAnswer == null)
+        {
+            return;
+        }
+
         foreach (var item in answers)
         {
             playerAnswer.Add(item.GetAnswer());
@@ -31,13 +48,13 @@ public class AnswerChecker : Singleton<AnswerChecker>
 
         if (real)
         {
-            Debug.Log("진엔딩");
-            // 진엔딩
+            Debug.Log("진 엔딩");
+            quizController.DialogueScecne();
         }
         else if (fake)
         {
             Debug.Log("가짜엔딩");
-            // 가짜엔딩
+            quizController.DialogueScecne();
         }
         else
         {
@@ -49,6 +66,9 @@ public class AnswerChecker : Singleton<AnswerChecker>
             {
                 item.ClearAnswer();
             }
+
+            quizController.DialogueScecne();
+
             // 재도전~
         }
     }
