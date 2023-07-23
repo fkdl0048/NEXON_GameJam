@@ -18,7 +18,7 @@ public class BlackPanelAnimation : MonoBehaviour
         sequence = DOTween.Sequence();
         sequence
             .Append(GetComponent<SpriteRenderer>().DOFade(0.5f, 0.5f))
-            .Append(descryption.DOFade(1f, 0.5f))
+            .Append(descryption.DOFade(0.8f, 0.5f))
             .Join(text.DOFade(1f, 0.5f));
     }
 
