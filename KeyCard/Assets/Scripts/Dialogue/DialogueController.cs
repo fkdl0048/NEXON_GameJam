@@ -10,9 +10,6 @@ public class DialogueController : Singleton<DialogueController>
     [SerializeField] private FadeController fadeController;
     [SerializeField] private GameObject[] dialogueObjects;
 
-
-    int count = 2;
-    bool first;
     Button button;
 
     void Start()
@@ -56,26 +53,34 @@ public class DialogueController : Singleton<DialogueController>
             AsyncSceneLoader.LoadScene("Quiz");
         });
     }
+
+    public void CreditScene()
+    {
+        GameManager.Instance.GameState = GameState.Credit;
+    }
+
     IEnumerator GetCardInteractive()
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        button = GameObject.FindWithTag("DeckOpenButton").GetComponent<Button>();
+
+        button = GameObject.FindWithTag("ButtonCanvas").transform.GetChild(0).GetComponent<Button>();
     }
 
 
     public void PlusCard()
     {
-        if (count < 6)
-        {
-            for (int i = 0; i < 2; i++)
-                TurnManager.OnAddCard?.Invoke(true);
-        }
+        for (int i = 0; i < 2; i++)
+            TurnManager.OnAddCard?.Invoke(true);
     }
 
     public void ButtonInteratcive()
     {
         button.interactable = !button.interactable;
+    }
+
+    public void CardButtonActiveOn()
+    {
+        button.gameObject.SetActive(true);
     }
 }

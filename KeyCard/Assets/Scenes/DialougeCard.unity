@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &244141273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 110, y: 80}
   m_SizeDelta: {x: 168, y: 169}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &244141274
@@ -395,8 +395,9 @@ MonoBehaviour:
   cardLeft: {fileID: 1247356900}
   cardRight: {fileID: 1483258095}
   cardsTransform: {fileID: 1031441388}
+  cardHandPoint: {fileID: 927899665}
   cardSelectTransform: {fileID: 1713710880}
-  cardHandTransform: {fileID: 927899665}
+  isQuiz: 0
   descryptionImage: {fileID: 1210730937}
   eCardState: 0
   itemSO: {fileID: 11400000, guid: 1cc1524b334690c4e8743c5050b783d7, type: 2}
@@ -406,6 +407,7 @@ MonoBehaviour:
   isCardActivating: 0
   canDrag: 0
   canAnswer: 0
+  isCardDescryptionOn: 0
 --- !u!4 &269336930
 Transform:
   m_ObjectHideFlags: 0
@@ -568,9 +570,10 @@ GameObject:
   - component: {fileID: 628537846}
   - component: {fileID: 628537845}
   - component: {fileID: 628537844}
+  - component: {fileID: 628537848}
   m_Layer: 5
   m_Name: ButtonCanvas
-  m_TagString: Untagged
+  m_TagString: ButtonCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,7 +637,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: -170
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &628537847
 RectTransform:
@@ -658,6 +661,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &628537848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628537843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087b0d60bf39cf44496978637718a468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &763442506
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927899664}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.7, z: 0}
+  m_LocalPosition: {x: 0, y: -6.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -32,6 +32,11 @@ public class Order : MonoBehaviour
         SetOrder(isMostFront ? 100 : originOrder);
     }
 
+    public void SetMostBackOrder()
+    {
+        SetOrder(0);
+    }
+
     // 모든 오브젝트들 순서 설정
     public void SetOrder(int order)
     {

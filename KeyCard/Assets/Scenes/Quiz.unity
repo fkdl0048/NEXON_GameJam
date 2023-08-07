@@ -10203,6 +10203,7 @@ GameObject:
   - component: {fileID: 1388309781114665936}
   - component: {fileID: 1388309781114665937}
   - component: {fileID: 1388309781114665968}
+  - component: {fileID: 1388309781114665969}
   m_Layer: 5
   m_Name: Quiz_3
   m_TagString: Untagged
@@ -10279,6 +10280,18 @@ MonoBehaviour:
   - {fileID: 1388309779927172542}
   - {fileID: 1388309779448070468}
   quizController: {fileID: 1776530211}
+--- !u!114 &1388309781114665969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388309781114665938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceab488b3d970ef44bb5a825e8151761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1388309781158193448
 RectTransform:
   m_ObjectHideFlags: 0

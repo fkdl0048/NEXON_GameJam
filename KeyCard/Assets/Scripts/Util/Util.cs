@@ -19,6 +19,11 @@ public class PRS
         this.rot = rot;
         this.scale = scale;
     }
+
+    public void UpdatePos(Vector3 pos)
+    {
+        this.pos = pos;
+    }
 }
 
 public class Util

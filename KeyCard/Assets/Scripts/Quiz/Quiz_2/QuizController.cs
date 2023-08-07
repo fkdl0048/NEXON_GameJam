@@ -11,6 +11,9 @@ public class QuizController : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.GameState == GameState.Credit)
+            CreditScene();
+
         fadeController.FadeOut();
         //SceneManager.LoadScene("Quiz4", LoadSceneMode.Additive);
 
@@ -37,5 +40,10 @@ public class QuizController : MonoBehaviour
         fadeController.FadeIn();
 
         DOVirtual.DelayedCall(1, () => { AsyncSceneLoader.LoadScene("Dialogue"); });
+    }
+
+    public void CreditScene()
+    {
+        AsyncSceneLoader.LoadScene("Credit");
     }
 }

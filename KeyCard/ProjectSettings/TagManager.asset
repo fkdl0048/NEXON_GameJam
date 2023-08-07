@@ -8,6 +8,9 @@ TagManager:
   - Quiz
   - DeckOpenButton
   - Dialogue
+  - NameText
+  - Continue
+  - ButtonCanvas
   layers:
   - Default
   - TransparentFX
@@ -56,4 +59,7 @@ TagManager:
     locked: 0
   - name: Card
     uniqueID: 2905702497
+    locked: 0
+  - name: MapTouchLayer
+    uniqueID: 2222984643
     locked: 0

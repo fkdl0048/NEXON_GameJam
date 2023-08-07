@@ -22,6 +22,7 @@ public class Card : MonoBehaviour
     public Item item;
 
     bool isFront;
+    public bool isUp;
 
     public void Setup(Item item, bool isFront)
     {
@@ -88,17 +89,9 @@ public class Card : MonoBehaviour
 
     public void SetOparcity(float value)
     {
-        var alpha = GetComponent<SpriteRenderer>().color;
-        alpha.a = value;
-        GetComponent<SpriteRenderer>().color = alpha;
-
-        alpha = nameTMP.GetComponent<TMP_Text>().color;
-        alpha.a = value;
-        nameTMP.GetComponent<TMP_Text>().color = alpha;
-
-        alpha = cardImage.GetComponent<SpriteRenderer>().color;
-        alpha.a = value;
-        cardImage.GetComponent<SpriteRenderer>().color = alpha;
+        GetComponent<SpriteRenderer>().DOFade(value, 0.5f);
+        nameTMP.GetComponent<TMP_Text>().DOFade(value, 0.5f);
+        cardImage.GetComponent<SpriteRenderer>().DOFade(value, 0.5f);
     }
 
     public void MouseBlock(bool isActive)

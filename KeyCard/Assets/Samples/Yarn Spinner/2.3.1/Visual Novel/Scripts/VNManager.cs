@@ -68,6 +68,10 @@ namespace Yarn.Unity.Example {
 			
 			runner.AddCommandHandler("CardDraw", () => DialogueController.Instance.PlusCard());
 			runner.AddCommandHandler("CardAble", () => DialogueController.Instance.ButtonInteratcive());
+			runner.AddCommandHandler("CardActive", () => DialogueController.Instance.CardButtonActiveOn());
+			runner.AddCommandHandler("Credit", () => DialogueController.Instance.CreditScene());
+
+
 
 			// adds all Resources to internal lists / one big pile... it
 			// will scan inside all subfolders too! note: but when

@@ -54,11 +54,13 @@ public class AnswerChecker : Singleton<AnswerChecker>
 
         if (real)
         {
+            CardManager.Instance.CardMouseOverBlock();
             GameManager.Instance.GameState = GameState.HappyEnddingDialogue;
             quizController.DialogueScecne();
         }
         else if (fake)
         {
+            CardManager.Instance.CardMouseOverBlock();
             GameManager.Instance.GameState = GameState.BadEnddingDialogue;
             quizController.DialogueScecne();
         }

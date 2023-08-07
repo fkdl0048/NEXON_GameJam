@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,50 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &51988463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 51988464}
-  - component: {fileID: 51988465}
-  m_Layer: 0
-  m_Name: FileCreator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &51988464
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51988463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &51988465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51988463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceab488b3d970ef44bb5a825e8151761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &143548780
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &244141273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -503,9 +459,10 @@ MonoBehaviour:
   cardLeft: {fileID: 1247356900}
   cardRight: {fileID: 1483258095}
   cardsTransform: {fileID: 1031441388}
+  cardHandPoint: {fileID: 0}
   cardSelectTransform: {fileID: 1713710880}
-  cardHandTransform: {fileID: 927899665}
-  descryptionText: {fileID: 1583361065}
+  isQuiz: 1
+  descryptionImage: {fileID: 0}
   eCardState: 0
   itemSO: {fileID: 11400000, guid: 1cc1524b334690c4e8743c5050b783d7, type: 2}
   cardNumber: 6
@@ -514,6 +471,7 @@ MonoBehaviour:
   isCardActivating: 0
   canDrag: 1
   canAnswer: 0
+  isCardDescryptionOn: 0
 --- !u!4 &269336930
 Transform:
   m_ObjectHideFlags: 0
@@ -813,7 +771,7 @@ GameObject:
   - component: {fileID: 628537844}
   m_Layer: 5
   m_Name: ButtonCanvas
-  m_TagString: Untagged
+  m_TagString: ButtonCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -894,7 +852,7 @@ RectTransform:
   - {fileID: 244141273}
   - {fileID: 1848598412}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1132,7 +1090,7 @@ RectTransform:
   - {fileID: 831231060}
   - {fileID: 1098199799}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1698,7 +1656,7 @@ RectTransform:
   m_Children:
   - {fileID: 143548781}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1970,7 +1928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1031441388
 Transform:
   m_ObjectHideFlags: 0
@@ -2023,7 +1981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: -76}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 617, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098199800
@@ -2776,8 +2734,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBAA8\uB450 \uC120\uD0DD\uD558\uB77C\uACE0 \uD588\uC73C\uB2C8 \uD55C
-    \uBA85\uC740 \uC544\uB2C8\uACA0\uC9C0."
+  m_text: "\uAC00\uC7A5 \uCC98\uC74C\uC5D0 \uB4E4\uC5B4\uAC08 \uCE74\uB4DC\uB294
+    '\uB7F0\uB358'\uC77C \uAC83\uC774\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5088b25078e9199478a2e6ca765a5c7e, type: 2}
   m_sharedMaterial: {fileID: 2418594797312499592, guid: 5088b25078e9199478a2e6ca765a5c7e, type: 2}
@@ -3119,7 +3077,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03259182, y: -0.27763367}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3130,7 +3088,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 20}
+  m_Size: {x: 13.584993, y: 23.492287}
   m_EdgeRadius: 0
 --- !u!114 &1603574234
 MonoBehaviour:
@@ -3242,7 +3200,7 @@ Transform:
   - {fileID: 1650331576}
   - {fileID: 1713710880}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1844680930
 GameObject:
@@ -3592,7 +3550,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03259182, y: -0.27763367}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3603,7 +3561,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 20}
+  m_Size: {x: 13.584993, y: 23.492287}
   m_EdgeRadius: 0
 --- !u!114 &1944954617
 MonoBehaviour:
@@ -3767,7 +3725,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03259182, y: -0.27763367}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3778,7 +3736,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 20}
+  m_Size: {x: 13.584993, y: 23.492287}
   m_EdgeRadius: 0
 --- !u!114 &2065423373
 MonoBehaviour:

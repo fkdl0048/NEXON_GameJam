@@ -99,7 +99,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: faf0b8c415cf5ce40a120a569a2d9231, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,7 +138,8 @@ MonoBehaviour:
     percent: 0
     name: 
     image: {fileID: 0}
-    descryption: 
+    descryption: {fileID: 0}
+  isUp: 0
 --- !u!60 &6246710594611768520
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -187,11 +188,10 @@ PolygonCollider2D:
       - {x: -10.566347, y: -16.335703}
       - {x: -10.193608, y: -16.530174}
       - {x: -9.999135, y: -16.578793}
-      - {x: -9.950517, y: -16.595}
-      - {x: -6.340092, y: -16.533543}
-      - {x: -6.5920105, y: -23.238707}
-      - {x: 5.199854, y: -22.854439}
-      - {x: 4.8488455, y: -16.59129}
+      - {x: -11.221498, y: -15.851433}
+      - {x: -11.266698, y: -22.417822}
+      - {x: 11.636628, y: -23.005152}
+      - {x: 11.132305, y: -15.571311}
       - {x: 9.934311, y: -16.595}
       - {x: 10.015342, y: -16.578793}
       - {x: 10.209814, y: -16.530174}

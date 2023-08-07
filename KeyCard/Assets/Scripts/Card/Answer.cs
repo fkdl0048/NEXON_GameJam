@@ -23,6 +23,7 @@ public class Answer : MonoBehaviour
     public void ClearAnswer()
     {
         StartCoroutine(CardManager.Instance.CardBackCoroutine(answerCard, prevNum));
+        prevNum = 0;
         answerCard = null;
         isInput = false;
     }

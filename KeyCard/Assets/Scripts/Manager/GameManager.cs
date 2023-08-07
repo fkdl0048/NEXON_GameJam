@@ -18,6 +18,7 @@ public enum GameState
     Quiz_4,
     HappyEnddingDialogue,
     BadEnddingDialogue,
+    Credit,
 }
 
 public class GameManager : MonoBehaviour
@@ -26,8 +27,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { Init(); return _instance; } }
 
     public GameState GameState { get; set; } = GameState.Title;
-
-
 
     static void Init()
     {
@@ -53,10 +52,5 @@ public class GameManager : MonoBehaviour
             return;
         }
         Init();
-
-
     }
-
-
-
 }

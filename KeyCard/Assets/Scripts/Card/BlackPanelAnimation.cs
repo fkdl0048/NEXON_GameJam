@@ -19,7 +19,7 @@ public class BlackPanelAnimation : MonoBehaviour
         sequence
             .Append(GetComponent<SpriteRenderer>().DOFade(0.5f, 0.5f))
             .Append(descryption.DOFade(0.8f, 0.5f))
-            .Join(text.DOFade(1f, 0.5f));
+            .Join(descryption.transform.GetChild(0).GetComponent<Image>().DOFade(1f, 0.5f));
     }
 
     public void DisablePanel()
@@ -28,7 +28,7 @@ public class BlackPanelAnimation : MonoBehaviour
         sequence
             .Append(GetComponent<SpriteRenderer>().DOFade(0, 0.5f))
             .Join(descryption.DOFade(0, 0.5f))
-            .Join(text.DOFade(0, 0.5f))
+            .Join(descryption.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f))
             .OnComplete(() =>
             {
                 descryption.gameObject.SetActive(false);

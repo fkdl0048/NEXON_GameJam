@@ -21,11 +21,8 @@ public class TurnManager : Singleton<TurnManager>
     public bool myTurn;
 
     WaitForSeconds delay025 = new WaitForSeconds(0.15f);
-    WaitForSeconds delay035 = new WaitForSeconds(0.35f);
-    WaitForSeconds delay05 = new WaitForSeconds(0.5f);
 
     public static Action<bool> OnAddCard;
-    //public static event Action EndDrawPhase;
 
     public IEnumerator StartGameCo(float time = 0.5f)
     {
@@ -39,20 +36,6 @@ public class TurnManager : Singleton<TurnManager>
         isLoading = false;
         yield return delay025;
 
-        CardManager.Instance.TakeOutControlCoroutine();
-    }
-
-    public IEnumerator ReDrawCards()
-    {
-        isLoading = true;
-
-        for (int i = 0; i < startCardCount; i++)
-        {
-            OnAddCard?.Invoke(true);
-            yield return delay025;
-        }
-
-        yield return delay035;
-        isLoading = false;
+        //CardManager.Instance.TakeOutControlCoroutine();
     }
 }

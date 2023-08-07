@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 35427693}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1353,7 +1353,7 @@ Canvas:
   m_GameObject: {fileID: 182906528}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1385960369}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -1726,7 +1726,7 @@ GameObject:
   - component: {fileID: 294484787}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2513,7 +2513,7 @@ Canvas:
   m_GameObject: {fileID: 467035976}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1385960369}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -3751,7 +3751,7 @@ GameObject:
   - component: {fileID: 812606624}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4513,7 +4513,7 @@ GameObject:
   - component: {fileID: 982396930}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6240,7 +6240,7 @@ Canvas:
   m_GameObject: {fileID: 1304220050}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1385960369}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -6346,7 +6346,7 @@ Canvas:
   m_GameObject: {fileID: 1310762260}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1385960369}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -6524,6 +6524,7 @@ MonoBehaviour:
   continueButton: {fileID: 2127321157}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!1 &1325985544
 GameObject:
   m_ObjectHideFlags: 0
@@ -6538,7 +6539,7 @@ GameObject:
   - component: {fileID: 1325985546}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6875,6 +6876,7 @@ MonoBehaviour:
   continueButton: {fileID: 35427691}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!1 &1365454715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7093,6 +7095,7 @@ MonoBehaviour:
   continueButton: {fileID: 1325985544}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!1 &1372905537
 GameObject:
   m_ObjectHideFlags: 0
@@ -7633,7 +7636,7 @@ GameObject:
   - component: {fileID: 1535856228}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7925,7 +7928,7 @@ GameObject:
   - component: {fileID: 1564549531}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8190,7 +8193,7 @@ Canvas:
   m_GameObject: {fileID: 1566570132}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1385960369}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -8444,6 +8447,7 @@ MonoBehaviour:
   continueButton: {fileID: 1564549529}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!1 &1694461342
 GameObject:
   m_ObjectHideFlags: 0
@@ -8911,7 +8915,7 @@ GameObject:
   - component: {fileID: 1775301872}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10087,6 +10091,7 @@ MonoBehaviour:
   continueButton: {fileID: 982396928}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!1 &1915999614
 GameObject:
   m_ObjectHideFlags: 0
@@ -11138,7 +11143,7 @@ GameObject:
   - component: {fileID: 2092136693}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11274,7 +11279,7 @@ GameObject:
   - component: {fileID: 2127321159}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11645,7 +11650,7 @@ GameObject:
   - component: {fileID: 1089646008}
   m_Layer: 0
   m_Name: ContinuePrompt
-  m_TagString: Untagged
+  m_TagString: Continue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11720,7 +11725,7 @@ GameObject:
   - component: {fileID: 8095329416310548757}
   m_Layer: 0
   m_Name: NameText
-  m_TagString: Untagged
+  m_TagString: NameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13126,6 +13131,7 @@ MonoBehaviour:
   continueButton: {fileID: 1624146783133626}
   holdTime: 1
   autoAdvance: 0
+  isCardActive: 0
 --- !u!114 &7112041586605773608
 MonoBehaviour:
   m_ObjectHideFlags: 0

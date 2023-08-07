@@ -19,8 +19,9 @@ public class CardManager : Singleton<CardManager>
     [SerializeField] Transform cardLeft;
     [SerializeField] Transform cardRight;
     [SerializeField] Transform cardsTransform;
+    [SerializeField] Transform cardHandPoint;
     [SerializeField] Transform cardSelectTransform;
-    [SerializeField] Transform cardHandTransform;
+    [SerializeField] bool isQuiz;
 
     [Header("그 외")]
     [SerializeField] Image descryptionImage;
@@ -46,6 +47,8 @@ public class CardManager : Singleton<CardManager>
     public bool isCardActivating;
     public bool canDrag;
     public bool canAnswer;
+    bool isFirstTime;
+    public bool isCardDescryptionOn;
     GameObject answerObject;
 
     WaitForSeconds delay = new WaitForSeconds(0.5f);
@@ -89,6 +92,31 @@ public class CardManager : Singleton<CardManager>
     {
         TurnManager.OnAddCard += AddCard;
         SetupItemBuffer();
+
+        if (isQuiz)
+            StartCoroutine(TakeOutCardForQuiz());
+    }
+
+    IEnumerator TakeOutCardForQuiz()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (var item in myCards)
+        {
+            item.MouseBlock(true);
+        }
+        StartCoroutine(CardAlignment());
+        cardsTransform.gameObject.SetActive(true);
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            Card item = myCards[i];
+            item.SetOparcity(1);
+        }
+
+        yield return new WaitForSeconds(1f);
+        foreach (var item in myCards)
+        {
+            item.MouseBlock(false);
+        }
     }
 
     void OnDestroy()
@@ -110,9 +138,8 @@ public class CardManager : Singleton<CardManager>
 
         SetOriginOrder(isMine);
         StartCoroutine(CardAlignment());
+        StartCoroutine(CardAlignment());
     }
-
-
 
     void SetOriginOrder(bool isMine)
     {
@@ -138,97 +165,13 @@ public class CardManager : Singleton<CardManager>
     {
         RaycastHit2D[] hits = Physics2D.RaycastAll(Util.MousePos, Vector3.forward);
         canAnswer = Array.Exists(hits, x => x.collider.gameObject.tag == "Answer");
-        if(canAnswer)
+        if (canAnswer)
             answerObject = Array.Find(hits, x => x.collider.gameObject.tag == "Answer").transform.gameObject;
     }
 
     void CardDrag()
     {
         selectDragCard.MoveTransform(new PRS(Util.MousePos, Util.QI, Vector3.one * 0.15f), false);
-    }
-
-    void InputKey()
-    {
-        if (eCardState == ECardState.CanUseCard)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-                ChoiceCard(0);
-            else if (Input.GetKeyDown(KeyCode.S))
-                ChoiceCard(1);
-            else if (Input.GetKeyDown(KeyCode.D))
-                ChoiceCard(2);
-            else if (Input.GetKeyDown(KeyCode.F))
-                ChoiceCard(3);
-            else if (Input.GetKeyDown(KeyCode.G))
-                ChoiceCard(4);
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                ChoiceCardWithKeyboard(-1);
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-                ChoiceCardWithKeyboard(1);
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (isSelected)
-                    StartCoroutine(UseCard());
-            }
-        }
-    }
-
-    void ChoiceCard(int index)
-    {
-        if (index >= myCards.Count)
-            return;
-
-        if (selectCard == myCards[index])
-        {
-            SelectAndEnlarge(selectCard, true);
-            return;
-        }
-        else
-        {
-            if (selectCard != null)
-                EnlargeCard(false, selectCard);
-
-            SelectAndEnlarge(myCards[index], true);
-        }
-    }
-
-    void ChoiceCardWithKeyboard(int arrowDirection)
-    {
-        if (myCards.Count <= 0)
-            return;
-
-        if (selectCard != null)
-            EnlargeCard(false, selectCard);
-
-        if (myCards.Count == 1 || currentCardNumber == -1)
-        {
-            SelectAndEnlarge(myCards[0], true);
-        }
-        else
-        {
-            var trueNum = currentCardNumber + arrowDirection;
-
-            if (trueNum < 0)
-            {
-                SelectAndEnlarge(myCards[myCards.Count - 1], true);
-                return;
-            }
-            else if (trueNum >= myCards.Count)
-            {
-                SelectAndEnlarge(myCards[0], true);
-                return;
-            }
-            SelectAndEnlarge(myCards[trueNum], true);
-        }
-    }
-
-    void SelectAndEnlarge(Card card, bool isSelecting)
-    {
-        EnlargeCard(true, card);
-        selectCard = card;
-        currentCardNumber = myCards.FindIndex(x => x == card);
     }
 
     public void EnlargeCard(bool isEnlarge, Card card)
@@ -238,25 +181,23 @@ public class CardManager : Singleton<CardManager>
             Vector3 enlargePos = new Vector3(card.originPRS.pos.x, -1f, -1f);
             card.MoveTransform(new PRS(enlargePos, Util.QI, Vector3.one * 0.15f), true, 0.15f);
             OtherCardsMove(card, true);
-            isSelected = isEnlarge;
         }
         else
         {
             card.MoveTransform(card.originPRS, true, 0.15f);
             OtherCardsMove(card, false);
-            isSelected = isEnlarge;
         }
-
+        isSelected = isEnlarge;
         card.GetComponent<Order>().SetMostFrontOrder(isEnlarge);
     }
 
     void OtherCardsMove(Card card, bool isMove)
     {
-
         if (isSelected == isMove)
             return;
 
         int index = myCards.FindIndex(x => x == card);
+
         if (isMove)
         {
             if (index == myCards.Count - 1)
@@ -296,7 +237,7 @@ public class CardManager : Singleton<CardManager>
 
     }
 
-    IEnumerator CardAlignment()
+    public IEnumerator CardAlignment()
     {
         List<PRS> originCardPRSs = new List<PRS>();
         originCardPRSs = RoundAlignment(cardLeft, cardRight, myCards.Count, 0.5f, Vector3.one * 0.1f);
@@ -307,6 +248,12 @@ public class CardManager : Singleton<CardManager>
 
             targetCard.originPRS = originCardPRSs[i];
             targetCard.MoveTransform(targetCard.originPRS, true, 0.35f);
+
+            if (!targetCard.isUp)
+            {
+                targetCard.originPRS.UpdatePos(targetCard.originPRS.pos + Vector3.up * 3.5f);
+                targetCard.isUp = true;
+            }
         }
         yield return null;
     }
@@ -344,36 +291,6 @@ public class CardManager : Singleton<CardManager>
             results.Add(new PRS(targetPos, targetRot, scale));
         }
         return results;
-    }
-
-    IEnumerator UseCard()
-    {
-        if (selectCard == null)
-            yield break;
-        isCardActivating = true;
-        EnlargeCard(true, selectCard);
-        myCards.Remove(selectCard);
-
-        yield return StartCoroutine(selectCard.MoveTransformCoroutine(new PRS(cardUseTrasnform.position, Util.QI, selectCard.originPRS.scale), true, 0.5f));
-        selectCard.DOKill();
-
-        if (myCards.Count == 1)
-            currentCardNumber = -1;
-        else
-            currentCardNumber -= 1;
-
-        if (myCards.Count > 0)
-        {
-            StartCoroutine(CardAlignment());
-            SetKey();
-        }
-        else
-        {
-            StartCoroutine(TurnManager.Instance.ReDrawCards());
-        }
-
-        isCardActivating = false;
-        selectCard = null;
     }
 
     public void CardSelectCancle()
@@ -444,37 +361,46 @@ public class CardManager : Singleton<CardManager>
         if (eCardState == ECardState.Loading)
             return;
 
-        if(!isMove)
+        if (!isMove)
             StartCoroutine(TakeOutCard());
     }
 
     public IEnumerator TakeOutCard()
     {
+        var button = GameObject.FindWithTag("ButtonCanvas").transform.GetChild(0).GetComponent<Button>();
+        button.interactable = false;
         isMove = true;
-        if (isCardAppearance)
+        if (!isCardAppearance)
         {
             for (int i = 0; i < myCards.Count; i++)
             {
                 Card item = myCards[i];
-                item.SetOparcity(100);
+                item.SetOparcity(1);
+                item.MouseBlock(false);
             }
-            var tween = cardsTransform.parent.DOMoveY(-3.7f, 0.5f);
+            var tween = cardHandPoint.DOLocalMoveY(-3f, 0.5f);
             yield return tween.WaitForCompletion();
+            yield return new WaitForSeconds(0.5f);
             isMove = false;
+            
         }
         else
         {
-            var tween = cardsTransform.parent.DOMove(cardsTransform.parent.position + Vector3.up * -3.46f, 0.5f);
-            yield return tween.WaitForCompletion();
-
             for (int i = 0; i < myCards.Count; i++)
             {
                 Card item = myCards[i];
                 item.SetOparcity(0);
+                item.MouseBlock(true);
             }
+
+            var tween = cardHandPoint.DOLocalMoveY(-6.5f, 0.5f);
+            yield return tween.WaitForCompletion();
+            yield return new WaitForSeconds(0.5f);
+
             isMove = false;
         }
 
+        button.interactable = true;
 
         isCardAppearance = !isCardAppearance;
     }
@@ -612,6 +538,7 @@ public class CardManager : Singleton<CardManager>
         }
 
         selectDragCard.MoveTransform(new PRS(answerObject.transform.position, answerObject.transform.rotation, answerObject.transform.localScale), false);
+        selectDragCard?.GetComponent<Order>().SetMostBackOrder();
 
         selectDragCard = null;
         isCardDrag = false;
@@ -623,7 +550,13 @@ public class CardManager : Singleton<CardManager>
     public IEnumerator CardBackCoroutine(Card card, int prevNum)
     {
         mouseExitCoolTime = true;
-        myCards.Insert(prevNum, card);
+
+        if (prevNum >= myCards.Count)
+            myCards.Add(card);
+        else
+            myCards.Insert(prevNum, card);
+
+        myCards.Sort(SortCard);
         SetOriginOrder(card);
         StartCoroutine(CardAlignment());
 
@@ -638,4 +571,17 @@ public class CardManager : Singleton<CardManager>
         mouseExitCoolTime = false;
     }
 
+    int SortCard(Card card1, Card card2)
+    {
+        return card1.item.id < card2.item.id ? -1 : 1;
+    }
+
+    public void CardMouseOverBlock()
+    {
+        for (int i = 0; i < myCards.Count; i++)
+        {
+            Card item = myCards[i];
+            item.MouseBlock(true);
+        }
+    }
 }
